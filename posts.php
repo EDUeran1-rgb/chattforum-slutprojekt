@@ -152,12 +152,12 @@ if(isset($_POST['btnparent'])){
 <?php endwhile;  ?>
 <?php if (isset($thepost)) { 
         if(islevel(10)) { ?>
-            <div class="addcomment">
+            <div>
                 <pre>
                     <form class="addpost" action="posts.php?thepost=<?=urlencode($thepost)?>" method="POST">
                         <input type="hidden" name="parentid" value="<?=$thepost?>">
                         <input type="text" name="text" placeholder="Add a comment" required>
-                        <input type="submit" name="btnparent" value="Add Comment">
+                        <input type="submit" name="btnparent" value="Add Comment" class="addcomment">
                     </form>
                 </pre> 
             </div>
