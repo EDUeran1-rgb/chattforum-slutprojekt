@@ -144,12 +144,7 @@ if(isset($_POST['btnparent'])){
                 
             <?php }  ?>
             <?php if (!isset($thepost)) {?>
-                <form action="posts.php" method="POST">
-                    <input type="hidden" name="thetopic" value="<?=$row['topic']?>">
-                    <input type="hidden" name="thetext" value="<?=$row['text']?>">
-                    <input type="hidden" name="theuid" value="<?=$row['userid']?>">
-                    <button name="thepost" value="<?=$row['id']?>">show more</button>
-                </form>
+                    <a href="posts.php?thepost=<?=urlencode($row['id'])?>" class="addpost">Show more</a>
                 <?php } ?>
         </div>
      
@@ -163,7 +158,7 @@ if(isset($_POST['btnparent'])){
                 <pre>
                     <form class="addpost" action="posts.php?thepost=<?=urlencode($thepost)?>" method="POST">
                         <input type="hidden" name="parentid" value="<?=$thepost?>">
-                        <input type="text" name="text" placeholder="Add a comment" required class="expandingboxspace">
+                        <input type="text" name="text" placeholder="Add a comment" required>
                         <input type="submit" name="btnparent" value="Add Comment">
                     </form>
                 </pre> 
