@@ -15,7 +15,7 @@ if(isset($_GET['del'])){
     $result=mysqli_query($conn, $sql);
     
     if (isset($_GET['thelink'])) {
-        header("Location: " . urldecode($_GET['thelink']). "?thepost=" . urlencode($parid));
+        header("Location: " . urldecode($_GET['thelink']). ($parid != 0 ? "?thepost=" . urlencode($parid) : ""));
     } else {
         header("Location: postadmin.php");
     }
