@@ -22,7 +22,7 @@
             <input type="text" name="user" placeholder="Username" required>
             <label for="pass">Password</label>
             <input type="password" name="pass" placeholder="Password" required>
-            <input type="submit" name="btn_login" value="Log in">
+            <input type="submit" name="btn_login" value="Log in"class="loginbttn">
         </form>
     </dialog>
 </body>
