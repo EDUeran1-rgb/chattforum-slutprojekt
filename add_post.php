@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <?php require_once("asset.php"); ?>
 <?php
-$mess="";
-if(isset($_SESSION['mess'])){
-    $mess=$_SESSION['mess'];
+if(!isLevel(10)){ 
+    header("Location: index.php");
 }
-
 if(isset($_POST['btnparent'])){
         $parentid=intval($_POST['parentid']);
     } else {
@@ -40,19 +38,9 @@ if(isset($_POST['btnAdd'])){
             <input type="text" name="topic" placeholder="Topic" required>
             <textarea name="text" placeholder="Text" required class="addposttext"></textarea>
             <input type="hidden" name="parentid" value="<?=$parentid?>">
-            <input type="submit" name="btnAdd" value="Add">
+            <input type="submit" name="btnAdd" value="Add" class="addpostbttn">
         </form>
     </main>
 <?php require_once("_footer.php"); ?>
-    <dialog id="login" popover>
-        <form action="_login.php" method="POST">
-            <input type="hidden" name="thelink" value="add_post.php">
-            <label for="user">Username</label>
-            <input type="text" name="user" placeholder="Username" required>
-            <label for="pass">Password</label>
-            <input type="password" name="pass" placeholder="Password" required>
-            <input type="submit" name="btn_login" value="Log in"class="loginbttn">
-        </form>
-    </dialog>
 </body>
 </html>

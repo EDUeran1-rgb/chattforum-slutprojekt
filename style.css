@@ -45,23 +45,23 @@ nav{
         text-shadow: 0 0 5px var(--clr_header);
     }
 }
-    .loginbttn{
-        padding:0rem;
-        height :100%;
-        margin:0rem;
-        text-decoration: none;
-        
-        font-family: system-ui, sans-serif;
-        font-weight: bold;
-        color:white;
-        border-radius: .2rem;
-        padding: .2rem .3rem;
-        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
-        border: none;
-            &:hover{
-                text-shadow: 0 0 5px var(--clr_header);
-            }
-    }
+.loginbttn{
+    padding:0rem;
+    height :100%;
+    margin:0rem;
+    text-decoration: none;
+    
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    color:white;
+    border-radius: .2rem;
+    padding: .2rem .3rem;
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+    border: none;
+        &:hover{
+            text-shadow: 0 0 5px var(--clr_header);
+        }
+}
 
     
 
@@ -280,6 +280,7 @@ button {
     padding:0.6rem;
     border-bottom: #0003 solid 5px;
     height: fit-content;
+    padding-bottom: 1.5rem;
 }
 .headtopic{
     padding-top:10px;
@@ -314,6 +315,22 @@ button {
 
 
 a.addpost{
+    text-decoration: none;
+    padding: .6rem 1rem;
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+    border-radius:10px;
+    width:fit-content;
+    font:bold 1.4rem system-ui;
+    text-decoration: none;
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    color:white;
+    border: none;
+    &:hover{
+        text-shadow: 0 0 5px var(--clr_header);
+    }
+}
+.addpostbttn{
     text-decoration: none;
     padding: .6rem 1rem;
     background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
