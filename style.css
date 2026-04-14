@@ -18,7 +18,7 @@ body{
     font-family: system-ui, sans-serif;
 }
 header{
-    background: linear-gradient(to bottom, oklch(57.268% 0.00007 271.152),var(--clr_back_header) ,var(--clr_back_header));
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
     color:var(--clr_header);
     height:4rem;
     padding: 1rem;
@@ -38,24 +38,28 @@ nav{
         color:white;
         border-radius: .2rem;
         padding: .2rem .3rem;
-        background: #0003;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
     }
     & a:hover{
-        background: #0006;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+        box-shadow: oklch(41.379% 0.16184 28.204);
     }
     & .loginbttn{
         padding:0rem;
         height :100%;
         margin:0rem;
         text-decoration: none;
+        
+        font-family: system-ui, sans-serif;
         font-weight: bold;
         color:white;
         border-radius: .2rem;
-        /*padding: .2rem .3rem;*/
-        background: #0003;
+        padding: .2rem .3rem;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
         border: none;
             &:hover{
-                background: #0006;
+                background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+                box-shadow: oklch(41.379% 0.16184 28.204);
             }
     }
 }
@@ -162,11 +166,13 @@ h1.mess{
     padding: .5rem;
     & a{
         text-decoration: none;
-        background: #0003;
+        
         padding: .5rem;
         border-radius: .5rem;}
     & a:hover{
-        background: #0005;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+        box-shadow: oklch(70.9% 0.00008 271.152);
+        
     }
 }
 details{
