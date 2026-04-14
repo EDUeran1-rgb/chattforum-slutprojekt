@@ -48,13 +48,13 @@ if(isset($_POST['btn_reg'])){
     <?php else: ?>    
     <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Preferred username" required >
+        <input type="text" name="username" id="username" placeholder="Preferred username (required)" required >
         <label for="realname">Real Name</label>
-        <input type="text" name="realname" id="realname" placeholder="Your real name"required>
+        <input type="text" name="realname" id="realname" placeholder="Your real name (not required)" >
         <label for="mail">Email</label>
-        <input type="email" name="mail" id="mail" placeholder="Your email adress" required>
+        <input type="email" name="mail" id="mail" placeholder="Your email adress (not required but recommended)" >
         <label for="password">Password</label>
-        <input type="text" name="password" id="password" placeholder="Password (min 8 chars)" required  pattern=".{8,}">
+        <input type="text" name="password" id="password" placeholder="Password (min 8 chars. required)" required  pattern=".{8,}">
         <input type="submit" name="btn_reg" value="Create user">
     </form>
     <?php endif; ?>

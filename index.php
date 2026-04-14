@@ -34,7 +34,6 @@ if(isset($_SESSION['mess'])){
 <h1 class="message"><?=$mess;?></h1>
 
 
-
     </main>
 <?php require_once("_footer.php"); ?>
     <dialog id="login" popover>
