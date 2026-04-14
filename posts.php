@@ -57,7 +57,7 @@ if(isset($_POST['btnparent'])){
         ?><a href="posts.php" class="addpost">Back</a><?php
 
         echo"<h2 class='headtopic'>" . $topic . "</h2>";
-        echo"<p class='headtext'>" . $text . "</p>";
+        echo"<p class='expandingboxspace'>" . $text . "</p>";
         echo"<p>Posted by: " . getUsername2($theuid) . " Posted: " . $row['created'] . "</p>";
         if(showrating($thepost) !== false){
             echo"<p>Rating: " . showRating($thepost) . "</p>";
