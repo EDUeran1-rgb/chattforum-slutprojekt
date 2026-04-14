@@ -99,14 +99,12 @@ if(isset($_POST['btnparent'])){
 <details>
     <summary>
         <div>
-            
-            
-                <?php if (!isset($thepost)) { ?>
-                    <h2><?=$row['topic']?></h2>
-                <?php }else{ ?>
-                    <p class="expandingboxspace"><?=$row['text']?></p> 
-                <?php } ?>
-                <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+            <?php if (!isset($thepost)) { ?>
+                <h2 class="headtopic"><?=$row['topic']?></h2>
+            <?php }else{ ?>
+                <p class="expandingboxspace"><?=$row['text']?></p> 
+            <?php } ?>
+            <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
         </div>
             <div class="filler"></div>
             
