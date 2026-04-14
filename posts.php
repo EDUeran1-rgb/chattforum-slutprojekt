@@ -104,7 +104,7 @@ if(isset($_POST['btnparent'])){
                 <?php if (!isset($thepost)) { ?>
                     <h2><?=$row['topic']?></h2>
                 <?php }else{ ?>
-                    <p class="commenttext"><?=$row['text']?></p> 
+                    <p class="expandingboxspace"><?=$row['text']?></p> 
                 <?php } ?>
                 <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
         </div>

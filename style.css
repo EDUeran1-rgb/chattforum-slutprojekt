@@ -270,7 +270,7 @@ button {
     word-break: break-word;    
     white-space: normal;
 }
-.commenttext{
+.expandingboxspace{
     width: 100%;
     word-wrap: break-word; 
     overflow-wrap: break-word; 
@@ -278,13 +278,6 @@ button {
     white-space: normal;
 }
 
-.headtext{
-    width: 100%;
-    word-wrap: break-word; 
-    overflow-wrap: break-word; 
-    word-break: break-word;    
-    white-space: normal;
-}
 
 a.addpost{
     text-decoration: none;
