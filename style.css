@@ -1,7 +1,7 @@
 :root{
-    --clr_back_header:#000;
-    --clr_header:#8bb0de;
-    --clr_back_nav:#878787;
+    --clr_back_header:oklch(0% 0 0);
+    --clr_header:oklch(69.244% 0.12452 231.268);
+    --clr_back_nav:oklch(60.662% 0.00007 271.152);
     --clr_back_footer:var(--clr_back_nav);
 
 }
@@ -18,7 +18,7 @@ body{
     font-family: system-ui, sans-serif;
 }
 header{
-    background: var(--clr_back_header);
+    background: linear-gradient(to bottom, oklch(57.268% 0.00007 271.152),var(--clr_back_header) ,var(--clr_back_header));
     color:var(--clr_header);
     height:4rem;
     padding: 1rem;
