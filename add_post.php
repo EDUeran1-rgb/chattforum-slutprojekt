@@ -36,9 +36,9 @@ if(isset($_POST['btnAdd'])){
     </header>
 <?php require_once("_nav.php"); ?>
     <main>
-        <form action="add_post.php" method="POST">
+        <form action="add_post.php" method="POST" class="addpostform">
             <input type="text" name="topic" placeholder="Topic" required>
-            <input type="text" name="text" placeholder="Text" required>
+            <textarea name="text" placeholder="Text" required class="addposttext"></textarea>
             <input type="hidden" name="parentid" value="<?=$parentid?>">
             <input type="submit" name="btnAdd" value="Add">
         </form>
