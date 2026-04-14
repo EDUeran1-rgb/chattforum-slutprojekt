@@ -163,7 +163,7 @@ if(isset($_POST['btnparent'])){
                 <pre>
                     <form class="addpost" action="posts.php?thepost=<?=urlencode($thepost)?>" method="POST">
                         <input type="hidden" name="parentid" value="<?=$thepost?>">
-                        <input type="text" name="text" placeholder="Add a comment" required>
+                        <input type="text" name="text" placeholder="Add a comment" required class="expandingboxspace">
                         <input type="submit" name="btnparent" value="Add Comment">
                     </form>
                 </pre> 
