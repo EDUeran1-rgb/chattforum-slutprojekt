@@ -55,7 +55,7 @@ if(isset($_POST['btn_reg'])){
         <input type="email" name="mail" id="mail" placeholder="Your email adress (not required but recommended)" >
         <label for="password">Password</label>
         <input type="text" name="password" id="password" placeholder="Password (min 8 chars. required)" required  pattern=".{8,}">
-        <input type="submit" name="btn_reg" value="Create user">
+        <input type="submit" name="btn_reg" value="Create user" class="registrbttn">
     </form>
     <?php endif; ?>
     </main>

@@ -347,6 +347,29 @@ a.addpost{
     }
 }
 
+.registrbttn{
+    text-decoration: none;
+    padding: .6rem 1rem;
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+    border-radius:10px;
+    width:100%;
+    font:bold 1.4rem system-ui;
+    text-decoration: none;
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    color:white;
+    border: none;
+    &:hover{
+        outline:3px solid var(--clr_header);
+        outline-offset: 3px;
+        text-shadow: 0 0 5px var(--clr_header);
+    }
+    &:active{
+        
+        outline-offset: 0px;
+        
+    }
+}
 .addcomment{
 
     text-decoration: none;
