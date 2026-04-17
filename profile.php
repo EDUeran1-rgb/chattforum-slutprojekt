@@ -1,4 +1,9 @@
 <?php require_once("asset.php"); ?>
+<?php
+if(!isLevel(10)){ 
+    header("Location: index.php");
+}
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,22 +13,31 @@
 </head>
 <body>
     <header>
-        <h1>Profile</h1>
+        <h1>Profile: <?=getUsername()?></h1>
     </header>
     <?php require_once("_nav.php"); ?>
     <main>
-        
+        <div class="profilecontainer">
+            <div class="profilespot">
+                <h2>Profile Information</h2>
+                <p>Username: <?=getUsername()?></p>
+                <p>Real Name: <?=getRealname() ? getRealname() : "Not provided" ?></p>
+                <p>Email: <?=getMail() ? getMail() : "Not provided" ?></p>
+                <p>Account created: <?=getCreated()?></p>
+                <div class="profiletoolscontainer">
+                <h2>Tools</h2>
+                    <div class="profiletools">
+                        <a href="useradmin.php?edit=<?=$_SESSION['id']?>&from=profile">Edit Profile</a>
+                        <a href="index.php">index</a>
+                        <a href="index.php">index</a>
+                        <a href="index.php">index</a>
+                        <a href="index.php">index</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </main>
 <?php require_once("_footer.php"); ?>
-<dialog id="login" popover>
-        <form action="_login.php" method="POST">
-            <input type="hidden" name="thelink" value="profile.php">
-            <label for="user">Username</label>
-            <input type="text" name="user" placeholder="Username" required>
-            <label for="pass">Password</label>
-            <input type="password" name="pass" placeholder="Password" required>
-            <input type="submit" name="btn_login" value="Log in"class="loginbttn">
-        </form>
-    </dialog>
 </body>
 </html>
