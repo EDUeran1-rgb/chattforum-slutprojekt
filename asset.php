@@ -102,21 +102,7 @@ function showRating($revid){
         return false;
     }
 }
-function isAlcoholic($value){
-    if($value){
-        return "🥴";
-    }else{
-        return "🤓";
-    }
-}
-function isSelected($val){
-    $val=boolval($val);
-    if($val){
-        return true;
-    }else{
-        return false;
-    }
-}
+
 function getUsername(){
     global $conn;
     $userid=$_SESSION['id'];
