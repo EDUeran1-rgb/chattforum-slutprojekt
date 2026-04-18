@@ -28,10 +28,10 @@ if(!isLevel(10)){
                 <h2>Tools</h2>
                     <div class="profiletools">
                         <a href="useradmin.php?edit=<?=$_SESSION['id']?>&from=profile">Edit Profile</a>
-                        <a href="index.php">index</a>
-                        <a href="index.php">index</a>
-                        <a href="index.php">index</a>
-                        <a href="index.php">index</a>
+                        <a href="index.php">index (placeholder)</a>
+                        <a href="index.php">index (placeholder)</a>
+                        <a href="index.php">index (placeholder)</a>
+                        <a href="index.php">index (placeholder)</a>
                     </div>
                 </div>
             </div>

@@ -37,9 +37,10 @@ if(isset($_POST['btnparent'])){
     <main>
 
 
-<div class="headpost">
+
 <?php
     if (isset($thepost)) {
+        ?><div class="headpost"><?php
         $sql="SELECT * FROM tbl_posts WHERE id=$thepost";
         $result=mysqli_query($conn, $sql);
         $row=mysqli_fetch_assoc($result);
@@ -87,6 +88,7 @@ if(isset($_POST['btnparent'])){
             <?php 
             
             endif;
+        ?></div><?php
     } else {
          if (isLevel(10)) { ?>
             <a href="add_post.php" class="addpost">Add new post!</a>
@@ -95,7 +97,7 @@ if(isset($_POST['btnparent'])){
     }
     $result=mysqli_query($conn, $sql);
     while($row=mysqli_fetch_assoc($result)): ?>
-    </div>
+    
 <details>
     <summary>
         <div>

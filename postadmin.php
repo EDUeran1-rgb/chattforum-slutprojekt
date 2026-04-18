@@ -82,7 +82,7 @@ if(isset($_POST['btn_edit'])){
             
             <label for="text">Text:</label>
             <input type="text" name="text" id="text" value="<?=$row['text']?>">
-            <input type="submit" name="btn_edit" value="Update Post">
+            <input type="submit" name="btn_edit" value="Update Post" class="registrbttn">
         </form>
         <?php else: ?>
  <?php
