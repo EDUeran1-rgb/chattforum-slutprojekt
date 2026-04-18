@@ -43,6 +43,27 @@ if(isset($_POST['btn_edit'])){
     $result=mysqli_query($conn, $sql);
     header("Location: useradmin.php");
 }}
+if (isset($_POST['btn_edit_pass'])){
+    $id=intval($_POST['id']);
+    $password=$_POST['password'];
+    if($_POST['password'] !== $_POST['password2']){
+        header("Location: profile.php");
+        exit();
+    }else{
+        $sql="SELECT password FROM tbl_user WHERE id=$id";
+        $result=mysqli_query($conn, $sql);
+        $row=mysqli_fetch_assoc($result);
+        if(md5($_POST['oldpassword']) !== $row['password']){
+            header("Location: profile.php");
+            exit();
+        }else{
+            $password=md5($password);
+            $sql="UPDATE tbl_user SET password='$password' WHERE id=$id";
+            $result=mysqli_query($conn, $sql);
+            header("Location: profile.php");
+        }
+    }
+}
 
 ?>
 <html lang="en">
@@ -97,9 +118,9 @@ if(isset($_POST['btn_edit'])){
                 <label for="oldpassword">Current password:</label>
                 <input type="text" name="oldpassword" id="oldpassword" placeholder="Current password" required>
                 <label for="password">New password:</label>
-                <input type="text" name="password" id="password" placeholder="New password" required>
+                <input type="text" name="password" id="password" placeholder="New password minimum 8 characters" required pattern=".{8,}">
                 <label for="password2">Repeat new password:</label>
-                <input type="text" name="password2" id="password2" placeholder="Repeat new password" required>
+                <input type="text" name="password2" id="password2" placeholder="Repeat new password minimum 8 characters" required pattern=".{8,}">
                 <input type="submit" name="btn_edit_pass" id="btn_edit_pass" value="Change Password" class="registrbttn">
             </form>
         <?php } ?>
@@ -190,17 +211,6 @@ if(isset($_POST['btn_edit'])){
             password2.reportValidity();
             password.setCustomValidity("");
             password.reportValidity();
-        }
-    });
-    
-    oldpassword.addEventListener("input", function(){
-        <?php $pass=md5( ?> oldpassword.value <?php ) ?>
-        if(<?= $pass ?> !== currentpassword){
-            oldpassword.setCustomValidity("Current password is incorrect");
-            oldpassword.reportValidity();
-        }else{
-            oldpassword.setCustomValidity("");
-            oldpassword.reportValidity();
         }
     });
 </script>
