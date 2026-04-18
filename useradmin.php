@@ -192,6 +192,7 @@ if(isset($_POST['btn_edit'])){
             password.reportValidity();
         }
     });
+    
     oldpassword.addEventListener("input", function(){
         <?php $pass=md5( ?> oldpassword.value <?php ) ?>
         if(<?= $pass ?> !== currentpassword){
