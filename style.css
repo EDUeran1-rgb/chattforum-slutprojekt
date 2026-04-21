@@ -101,16 +101,30 @@ dialog{
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    place-content: center;    
+}
 
+.closebttn{
+    text-decoration: none;
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+    padding: .5rem;
+    border-radius: .5rem;
+    font-family: system-ui, sans-serif;
+    font-weight: bold;
+    color:white;
+    border: none;
+    }
+.closebttn:hover{
+    text-shadow: 0 0 5px var(--clr_header);
 }
 dialog form{
-    padding: 2rem;
+    padding: 1.5rem;
     background: rgba(24, 24, 24, 0.151);
-    width:100%;
-    height:100%;
+    width:fit-content;
     display:grid;
     place-content: center;
 }
+
 .summary{
     display:flex;
     width:100%;

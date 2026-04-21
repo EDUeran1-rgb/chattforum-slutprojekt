@@ -6,9 +6,10 @@
         
         <div class="fill"></div>
         <?php if(isLevel(1000)):?>
-            <a href="useradmin.php">User Admin</a>
             <a href="postadmin.php">Post Admin</a>
-        <?php endif; ?>
+            <?php if(isLevel(10000)){?>
+            <a href="useradmin.php">User Admin</a>
+        <?php }endif; ?>
         <?php if(!isLevel(10)){?>
         <a href="register.php?thelink=<?=urlencode($_SERVER['REQUEST_URI'])?>">Register</a>
         <button class="loginbttn" popovertarget="login">Login</button>

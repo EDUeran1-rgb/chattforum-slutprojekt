@@ -46,7 +46,7 @@ if(isset($_POST['btn_reg'])){
             <h1>Thank you for registering a user!</h1>
             <a href="<?=isset($_GET['thelink']) ? urldecode($_GET['thelink']) : 'index.php' ?>">Go to homepage</a>
     <?php else: ?>    
-    <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST">
+    <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST" onsubmit="disableButton">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="Preferred username (required)" required >
         <label for="realname">Real Name</label>
@@ -84,5 +84,9 @@ if(isset($_POST['btn_reg'])){
 
         }
     });
-    
+    function disableButton{
+    const postbtn = document.querySelector('.registrbttn');
+    postbtn.disabled = true;
+    return true;
+    }
 </script>
