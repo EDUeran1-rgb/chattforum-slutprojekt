@@ -5,7 +5,13 @@ if(isLevel(10)){
     header("Location: " . (isset($_GET['thelink']) ? urldecode($_GET['thelink']) : 'index.php'));
 }
 if(isset($_POST['btn_reg'])){
+    
     $username=htmlentities($_POST['username']);
+    $sql="SELECT * From tbl_user WHERE(username='$username')";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)===1){
+        $_SESSION['mess']="error while atempting to register, please try again.";
+    }else{
     $realname=htmlentities($_POST['realname']);
     $mail=htmlentities($_POST['mail']);
     $password=md5($_POST['password']);
@@ -25,7 +31,7 @@ if(isset($_POST['btn_reg'])){
         mysqli_query($conn, $sql);
     }else{
         $_SESSION['mess']="thank you for registering a user! unfortunately we couldn't log you in automatically, please log in manually.";
-    }
+    }}
     header("Location: " . (isset($_GET['thelink']) ? urldecode($_GET['thelink']) : 'index.php'));
 }
 ?>
@@ -46,7 +52,7 @@ if(isset($_POST['btn_reg'])){
             <h1>Thank you for registering a user!</h1>
             <a href="<?=isset($_GET['thelink']) ? urldecode($_GET['thelink']) : 'index.php' ?>">Go to homepage</a>
     <?php else: ?>    
-    <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST" onsubmit="disableButton">
+    <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST" onsubmit="disableButton()">
         <label for="username">Username</label>
         <input type="text" name="username" id="username" placeholder="Preferred username (max 16 chars. required)" required pattern=".{,16}" >
         <label for="realname">Real Name</label>
@@ -70,7 +76,7 @@ if(isset($_POST['btn_reg'])){
             $sql="SELECT username FROM tbl_user";
             $result=mysqli_query($conn, $sql);
             while($row=mysqli_fetch_assoc($result)): ?>
-                "<?=$row['username']?>",
+            "<?=$row['username']?>",
         <?php endwhile; ?>
     ]
     username.addEventListener("input", function(){
@@ -84,7 +90,7 @@ if(isset($_POST['btn_reg'])){
 
         }
     });
-    function disableButton{
+    function disableButton(){
     const postbtn = document.querySelector('.registrbttn');
     postbtn.disabled = true;
     return true;
