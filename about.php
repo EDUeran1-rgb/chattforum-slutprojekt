@@ -16,6 +16,9 @@
     </main>
 <?php require_once("_footer.php"); ?>
 <dialog id="login" popover>
+    <div class="dialogfitbox">
+        <button class="closebttn" popovertarget="login">Close</button>
+    </div>
         <form action="_login.php" method="POST">
             <input type="hidden" name="thelink" value="about.php">
             <label for="user">Username</label>

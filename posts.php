@@ -169,6 +169,9 @@ if(isset($_POST['btnparent'])){
     </main>
 <?php require_once("_footer.php"); ?>
     <dialog id="login" popover>
+        <div class="dialogfitbox">
+        <button class="closebttn" popovertarget="login">Close</button>
+        </div>
         <form action="_login.php" method="POST">
             <?php if (isset($thepost)) { ?>
                 <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>">

@@ -103,7 +103,13 @@ dialog{
     transform: translate(-50%,-50%);
     place-content: center;    
 }
-
+.dialogfitbox{
+    position:absolute;
+    left:50%;
+    transform: translate(-50%,-50%);
+    place-content: center;
+    z-index: 2;    
+}
 .closebttn{
     text-decoration: none;
     background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
@@ -113,11 +119,13 @@ dialog{
     font-weight: bold;
     color:white;
     border: none;
+    
     }
 .closebttn:hover{
     text-shadow: 0 0 5px var(--clr_header);
 }
 dialog form{
+    z-index: 1;
     padding: 1.5rem;
     background: rgba(24, 24, 24, 0.151);
     width:fit-content;
