@@ -5,9 +5,9 @@ if(isLevel(10)){
     header("Location: " . (isset($_GET['thelink']) ? urldecode($_GET['thelink']) : 'index.php'));
 }
 if(isset($_POST['btn_reg'])){
-    $username=$_POST['username'];
-    $realname=$_POST['realname'];
-    $mail=$_POST['mail'];
+    $username=htmlentities($_POST['username']);
+    $realname=htmlentities($_POST['realname']);
+    $mail=htmlentities($_POST['mail']);
     $password=md5($_POST['password']);
     $sql="INSERT INTO tbl_user(username, password, realname, mail) VALUES ('$username', '$password', '$realname', '$mail')";
     $result=mysqli_query($conn, $sql);
@@ -48,7 +48,7 @@ if(isset($_POST['btn_reg'])){
     <?php else: ?>    
     <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST" onsubmit="disableButton">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Preferred username (required)" required >
+        <input type="text" name="username" id="username" placeholder="Preferred username (max 16 chars. required)" required pattern=".{,16}" >
         <label for="realname">Real Name</label>
         <input type="text" name="realname" id="realname" placeholder="Your real name (not required)" >
         <label for="mail">Email</label>

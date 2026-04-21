@@ -64,15 +64,18 @@ nav{
     padding: .2rem .3rem;
     background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
     border: none;
-        &:hover{
+
+}
+dialog .loginbttn{
+    &:hover{
             text-shadow: 0 0 5px var(--clr_header);
             outline-offset: 3px;
             outline:3px solid var(--clr_header);
             
-        }
-        &:active{
+    }
+    &:active{
             outline-offset: 0px;
-        }
+    }
 }
 
 

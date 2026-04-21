@@ -24,9 +24,9 @@ if(isset($_GET['level'])){
 if(isset($_POST['btn_edit'])){
     if(isset($_POST['fromprofile'])){
         $id=intval($_POST['id']);
-        $realname=$_POST['realname'];
-        $mail=$_POST['mail'];
-        $username=$_POST['username'];
+        $realname=htmlentities($_POST['realname']);
+        $mail=htmlentities($_POST['mail']);
+        $username=htmlentities($_POST['username']);
         $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
         $result=mysqli_query($conn, $sql);
         header("Location: profile.php");

@@ -182,7 +182,7 @@ function truncateText($text, $limit = 100) {
         return $text;
     }
     $truncated = substr($text, 0, $limit);
-    $truncated = substr($truncated, 0, strrpos($truncated, ' '));
+    
     return $truncated . '...';
 }
 ?>

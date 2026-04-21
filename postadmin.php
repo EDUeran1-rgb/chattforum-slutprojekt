@@ -93,11 +93,18 @@ if(isset($_POST['btn_edit'])){
 <details>
     <summary>
         <div>
-            <?php if($row['parentid']==0){
-                ?><h2 class="headtopic"><?=$row['topic']?>&nbsp;&nbsp;<span></span></h2><?php
-            }else{?>
-                <h2 class="headtopic"><?=truncateText($row['topic'],5)?>&nbsp;&nbsp;<span></span></h2>
-            <?php}?>
+            <?php if($row['parentid']==0){?>
+            <h2 class="headtopic"><?=$row['topic']?> &nbsp;&nbsp;<span></span></h2>
+            <h4>Post &nbsp;&nbsp;<span></span></h4>
+            <h4>By: <?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
+            <h4><?=$row['created']?></h4>
+                
+            <?php }else{ ?>
+                <h2 class="headtopic"><?=truncateText($row['text'],5)?> &nbsp;&nbsp;<span></span></h2>
+                <h4>Comment &nbsp;&nbsp;<span></span></h4>
+                <h4>By: <?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
+                <h4><?=$row['created']?></h4>
+            <?php } ?>
             
         </div> 
             <div class="filler"></div>
@@ -108,7 +115,7 @@ if(isset($_POST['btn_edit'])){
              } ?>  
             <div> <?=$rating2?> &nbsp;&nbsp;<a href="postadmin.php?edit=<?=$row['id']?>">🖋️</a>&nbsp;&nbsp;<a href="postadmin.php?del=<?=$row['id']?>">❌</a></div>   
     </summary>
-    <h4 class="expandingboxspace"><?=$row['text']?></h4>
+        <h4 class="expandingboxspace"><?=$row['text']?></h4>
 </details>
 <?php endwhile; ?>
             <?php endif; ?>
