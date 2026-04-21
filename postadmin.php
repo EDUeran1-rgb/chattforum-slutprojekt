@@ -95,8 +95,11 @@ if(isset($_POST['btn_edit'])){
         <div>
             <?php if($row['parentid']==0){
                 ?><h2 class="headtopic"><?=$row['topic']?>&nbsp;&nbsp;<span></span></h2><?php
-            }?>
-            <h4 class="expandingboxspace"><?=$row['text']?></h4></div> 
+            }else{?>
+                <h2 class="headtopic"><?=truncateText($row['topic'],5)?>&nbsp;&nbsp;<span></span></h2>
+            <?php}?>
+            
+        </div> 
             <div class="filler"></div>
             <?php if (showRating($row['id']) !== false) {
                 $rating2 = "Rated:" . showRating($row['id']);
@@ -105,6 +108,7 @@ if(isset($_POST['btn_edit'])){
              } ?>  
             <div> <?=$rating2?> &nbsp;&nbsp;<a href="postadmin.php?edit=<?=$row['id']?>">🖋️</a>&nbsp;&nbsp;<a href="postadmin.php?del=<?=$row['id']?>">❌</a></div>   
     </summary>
+    <h4 class="expandingboxspace"><?=$row['text']?></h4>
 </details>
 <?php endwhile; ?>
             <?php endif; ?>

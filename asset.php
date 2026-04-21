@@ -177,4 +177,12 @@ function comment($revid, $text,$parnttype){
     $sql="INSERT INTO tbl_posts (userid, text, parentid, parenttype) VALUES ('$userid', '$text', $revid,'$parnttype')";
     mysqli_query($conn, $sql);
 }
+function truncateText($text, $limit = 100) {
+    if (strlen($text) <= $limit) {
+        return $text;
+    }
+    $truncated = substr($text, 0, $limit);
+    $truncated = substr($truncated, 0, strrpos($truncated, ' '));
+    return $truncated . '...';
+}
 ?>
