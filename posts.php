@@ -170,20 +170,21 @@ if(isset($_POST['btnparent'])){
 <?php require_once("_footer.php"); ?>
     <dialog id="login" popover>
         <div class="dialogfitbox">
-        <button class="closebttn" popovertarget="login">Close</button>
+            <button class="closebttn" popovertarget="login">Close</button>
+            
+            <form action="_login.php" method="POST">
+                <?php if (isset($thepost)) { ?>
+                    <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>">
+                <?php } else { ?>
+                    <input type="hidden" name="thelink" value="posts.php">
+                <?php } ?>
+                <label for="user">Username</label>
+                <input type="text" name="user" placeholder="Username" required>
+                <label for="pass">Password</label>
+                <input type="password" name="pass" placeholder="Password" required>
+                <input type="submit" name="btn_login" value="Log in"class="loginbttn">
+            </form>
         </div>
-        <form action="_login.php" method="POST">
-            <?php if (isset($thepost)) { ?>
-                <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>">
-            <?php } else { ?>
-                <input type="hidden" name="thelink" value="posts.php">
-            <?php } ?>
-            <label for="user">Username</label>
-            <input type="text" name="user" placeholder="Username" required>
-            <label for="pass">Password</label>
-            <input type="password" name="pass" placeholder="Password" required>
-            <input type="submit" name="btn_login" value="Log in"class="loginbttn">
-        </form>
     </dialog>
     
 </body>

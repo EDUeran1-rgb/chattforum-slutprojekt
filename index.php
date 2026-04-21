@@ -39,7 +39,7 @@ if(isset($_SESSION['mess'])){
     <dialog id="login" popover>
         <div class="dialogfitbox">
         <button class="closebttn" popovertarget="login">Close</button>
-        </div>
+        
         <form action="_login.php" method="POST">
             
             <input type="hidden" name="thelink" value="index.php">
@@ -49,7 +49,7 @@ if(isset($_SESSION['mess'])){
             <input type="password" name="pass" placeholder="Password" required>
             <input type="submit" name="btn_login" value="Log in" class="loginbttn">
         </form>
-        
+        </div>
     </dialog>
     
 </body>

@@ -108,7 +108,11 @@ dialog{
     left:50%;
     transform: translate(-50%,-50%);
     place-content: center;
-    z-index: 2;    
+    padding: 1.5rem;
+    background: rgba(24, 24, 24, 0.151);
+    width:fit-content;
+    display:grid;
+    place-content: center;
 }
 .closebttn{
     text-decoration: none;
@@ -124,14 +128,7 @@ dialog{
 .closebttn:hover{
     text-shadow: 0 0 5px var(--clr_header);
 }
-dialog form{
-    z-index: 1;
-    padding: 1.5rem;
-    background: rgba(24, 24, 24, 0.151);
-    width:fit-content;
-    display:grid;
-    place-content: center;
-}
+
 
 .summary{
     display:flex;
