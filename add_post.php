@@ -34,7 +34,7 @@ if(isset($_POST['btnAdd'])){
     </header>
 <?php require_once("_nav.php"); ?>
     <main>
-        <form action="add_post.php" method="POST" class="addpostform">
+        <form action="add_post.php" method="POST" class="addpostform" onsubmit="disableButton">
             <input type="text" name="topic" placeholder="Topic" required>
             <textarea name="text" placeholder="Text" required class="addposttext"></textarea>
             <input type="hidden" name="parentid" value="<?=$parentid?>">
@@ -44,3 +44,10 @@ if(isset($_POST['btnAdd'])){
 <?php require_once("_footer.php"); ?>
 </body>
 </html>
+<script>
+function disableButton{
+    const postbtn = document.querySelector('.addpostbttn');
+    postbtn.disabled = true;
+    return true;
+}
+</script>
