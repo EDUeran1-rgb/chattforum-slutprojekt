@@ -116,11 +116,11 @@ if (isset($_POST['btn_edit_pass'])){
             <form action="useradmin.php" method="POST">
                 <input type="hidden" name="id" value="<?=$id?>">
                 <label for="oldpassword">Current password:</label>
-                <input type="text" name="oldpassword" id="oldpassword" placeholder="Current password" required>
+                <input type="password" name="oldpassword" id="oldpassword" placeholder="Current password" required>
                 <label for="password">New password:</label>
-                <input type="text" name="password" id="password" placeholder="New password minimum 8 characters" required pattern=".{8,}">
+                <input type="password" name="password" id="password" placeholder="New password minimum 8 characters" required pattern=".{8,}">
                 <label for="password2">Repeat new password:</label>
-                <input type="text" name="password2" id="password2" placeholder="Repeat new password minimum 8 characters" required pattern=".{8,}">
+                <input type="password" name="password2" id="password2" placeholder="Repeat new password minimum 8 characters" required pattern=".{8,}">
                 <input type="submit" name="btn_edit_pass" id="btn_edit_pass" value="Change Password" class="registrbttn">
             </form>
         <?php } ?>
