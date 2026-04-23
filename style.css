@@ -240,6 +240,16 @@ h1.mess{
         margin-left: auto;
         margin-right: auto;
     }
+    .uposts{
+        & .details{
+            width:100%;
+           
+        }
+        & details{
+            width:100%;
+            
+        }
+    }
     details{
         width: 50%;
         margin-left: auto;
@@ -324,11 +334,7 @@ button {
     margin-bottom: .6rem;
     padding: .5rem;
 }
-.ingredients, .recipe{
-    padding: .6rem;
-    background: #0001;
-    margin-top: .6rem;
-}
+
 
 .headpost{
     padding:0.6rem;
@@ -504,32 +510,25 @@ a.addpost{
 .profilecontainer{
     display:flex;
     gap:1rem;
-    justify-content: column;
-    
+    margin-left: 1rem;
+    margin-right:1rem;
 }
-.profilespot{
-    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header),var(--clr_back_header),var(--clr_back_header) ,var(--clr_back_header));
-    padding: 1rem;
-    border-radius: .3rem;
-    color: var(--clr_header);
-    width:calc(100% - 2rem);
-    margin-left: 1rem ;
-    margin-right: 1rem ;
+@media (max-width: 767px) {
+    .profilecontainer{
+        flex-direction: column;
+    }
 }
-.profiletoolscontainer{
-    border: 1px solid var(--clr_header);
-    border-radius: .3rem;
-    padding:.3rem;
-    display:flex;
-    flex-direction: column;
-    justify-content: column;
-    background: radial-gradient(circle, var(--clr_header), var(--clr_back_header));
-
+@media (min-width: 768px) {
+    .profilecontainer{
+        flex-direction: row;
+    }
 }
-.profiletools{
-    display: flex;
-    gap:.1rem;
-    & a{
+.uposts{
+    width:100%;
+    & .toptabs{
+        margin-bottom: .3rem;
+    }
+    & .firsttabpost {
         height :100%;
         text-decoration: none;
         margin:1px;
@@ -544,14 +543,63 @@ a.addpost{
             text-shadow: 0 0 5px var(--clr_header);
         }
     }
-}
-@media(max-width:767px){
-    .profiletools{
-        flex-direction: column;
+    & .secondtabcom{
+        height :100%;
+        text-decoration: none;
+        margin:1px;
+        font-family: system-ui, sans-serif;
+        font-weight: bold;
+        color:white;
+        border-radius: .2rem;
+        padding: .2rem .3rem;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+        border: none;
+        &:hover{
+            text-shadow: 0 0 5px var(--clr_header);
+        }
+    }
+    & .details{
+        width:calc(100% );
+    }
+    & details{
+        width:calc(100% );
     }
 }
-@media(min-width:767px){
-    .profiletools{
-        flex-direction: row;
+.profilespot{
+    background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header),var(--clr_back_header),var(--clr_back_header) ,var(--clr_back_header));
+    padding: 1rem;
+    border-radius: .3rem;
+    color: var(--clr_header);
+    width:100%;
+    height:fit-content;
+}
+.profiletoolscontainer{
+    border: 1px solid var(--clr_header);
+    border-radius: .3rem;
+    padding:.3rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: column;
+    background: radial-gradient(circle, var(--clr_header), var(--clr_back_header));
+    
+}
+.profiletools{
+    display: flex;
+    gap:.1rem;
+    flex-direction: column;
+    & a{
+        height :100%;
+        text-decoration: none;
+        margin:1px;
+        font-family: system-ui, sans-serif;
+        font-weight: bold;
+        color:white;
+        border-radius: .2rem;
+        padding: .2rem .3rem;
+        background: linear-gradient(to bottom, oklch(71.871% 0.00008 271.152),var(--clr_back_header) ,var(--clr_back_header));
+        border: none;
+        &:hover{
+            text-shadow: 0 0 5px var(--clr_header);
+        }
     }
 }
