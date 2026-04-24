@@ -54,8 +54,14 @@ if(isset($_POST['btnparent'])){
             exit;
         }
 
-        $sql="SELECT * FROM tbl_posts WHERE parentid=$thepost ORDER BY created ASC";  
-        ?><a href="posts.php" class="addpost">Back</a><?php
+        $sql="SELECT * FROM tbl_posts WHERE parentid=$thepost ORDER BY created ASC";
+        if(isset($_GET["profile"])){  
+            ?><a href="profile.php" class="addpost">Back</a><?php
+        } elseif (isset($_GET["profilecom"])) {
+            ?><a href="profile.php?changetocom" class="addpost">Back</a><?php
+        } else {
+            ?><a href="posts.php" class="addpost">Back</a><?php
+        }
 
         echo"<h2 class='headtopic'>" . $topic . "</h2>";
         echo"<p class='expandingboxspace'>" . $text . "</p>";
@@ -173,10 +179,22 @@ if(isset($_POST['btnparent'])){
             <button class="closebttn" popovertarget="login">Close</button>
             
             <form action="_login.php" method="POST">
-                <?php if (isset($thepost)) { ?>
+                <?php if (isset($thepost)) { 
+                    if(isset($_GET["profile"])){?>
+                    <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>&profile">
+                    <?php }elseif(isset($_GET["profilecom"])){?>
+                    <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>&profilecom">
+                    <?php } else { ?>
                     <input type="hidden" name="thelink" value="posts.php?thepost=<?=urlencode($thepost)?>">
-                <?php } else { ?>
+                    <?php } ?>
+                <?php } else { 
+                    if(isset($_GET["profile"])){?>
+                    <input type="hidden" name="thelink" value="posts.php?profile">
+                    <?php }elseif(isset($_GET["profilecom"])){?>
+                    <input type="hidden" name="thelink" value="posts.php?profilecom">
+                    <?php } else { ?>
                     <input type="hidden" name="thelink" value="posts.php">
+                    <?php } ?>
                 <?php } ?>
                 <label for="user">Username</label>
                 <input type="text" name="user" placeholder="Username" required>
