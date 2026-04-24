@@ -110,9 +110,9 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                                         
                                     <?php }  ?>
                                     <?php if (!isset($iscomment)) {?>
-                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile" class="addpost">Show more in Posts</a>
+                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile" class="addpost">Show in Posts</a>
                                         <?php } else { ?>
-                                            <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom" class="addpost">Show more in Posts</a>
+                                            <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom" class="addpost">Show in Posts</a>
                                         <?php } ?>
                                 
                             
