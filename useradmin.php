@@ -23,13 +23,17 @@ if(isset($_GET['level'])){
 }
 if(isset($_POST['btn_edit'])){
     if(isset($_POST['fromprofile'])){
-        $id=intval($_POST['id']);
-        $realname=htmlentities($_POST['realname']);
-        $mail=htmlentities($_POST['mail']);
-        $username=htmlentities($_POST['username']);
-        $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
-        $result=mysqli_query($conn, $sql);
-        header("Location: profile.php");
+        if($_GET['edit'] == $_SESSION['id']){
+            $id=intval($_POST['id']);
+            $realname=htmlentities($_POST['realname']);
+            $mail=htmlentities($_POST['mail']);
+            $username=htmlentities($_POST['username']);
+            $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
+            $result=mysqli_query($conn, $sql);
+            header("Location: profile.php");
+        } else {
+            header("Location: index.php");
+        }
     } else {
     $id=intval($_POST['id']);
     $username=$_POST['username'];
@@ -45,6 +49,7 @@ if(isset($_POST['btn_edit'])){
 }}
 if (isset($_POST['btn_edit_pass'])){
     $id=intval($_POST['id']);
+    if($id == $_SESSION['id']){
     $password=$_POST['password'];
     if($_POST['password'] !== $_POST['password2']){
         header("Location: profile.php");
@@ -62,6 +67,9 @@ if (isset($_POST['btn_edit_pass'])){
             $result=mysqli_query($conn, $sql);
             header("Location: profile.php");
         }
+    }
+    } else {
+        header("Location: index.php");
     }
 }
 
