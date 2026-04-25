@@ -3,17 +3,26 @@
 if(!isLevel(10)){ 
     header("Location: index.php");
 }
+if(isset($_GET["profid"])) {
+    $profid = $_GET["profid"];
+} elseif(isset($_POST["profid"])) {
+    $profid = $_POST["profid"];
+} else {
+    $profid = $_SESSION['id'];
+}
  if(isset($_GET['changetocom'])){
     $iscomment=intval(urldecode($_GET['changetocom']));
 }?>
 <?php if(isset($_POST['userrating'])){
 rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revtype']));
     if (isset($iscomment)) {
-        header("Location: profile.php?changetocom");
+        header("Location: profile.php?changetocom&profid=$profid");
     } else {
-        header("Location: profile.php");
+        header("Location: profile.php?profid=$profid");
+    }
 }
-}?>
+
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,40 +32,43 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
 </head>
 <body>
     <header>
-        <h1>Profile: <?=getUsername()?></h1>
+        <h1>Profile: <?=getUsername2($profid)?></h1>
     </header>
     <?php require_once("_nav.php"); ?>
     <main>
         <div class="profilecontainer">
             <div class="profilespot">
                 <h2>Profile Information</h2>
-                <p>Username: <?=getUsername()?></p>
-                <p>Real Name: <?=getRealname() ? getRealname() : "Not provided" ?></p>
-                <p>Email: <?=getMail() ? getMail() : "Not provided" ?></p>
-                <p>Account created: <?=getCreated()?></p>
+                <p>Username: <?=getUsername2($profid)?></p>
+                <p>Real Name: <?=getRealname2($profid) ? getRealname2($profid) : "Not provided" ?></p>
+                <p>Email: <?=getMail($profid) ? getMail($profid) : "Not provided" ?></p>
+                <p>Account created: <?=getCreated2($profid)?></p>
                 <div class="profiletoolscontainer">
+                    <?php if($profid == $_SESSION['id']){?>
                     <h2>Tools</h2>
+                    <?php } ?>
                     <div class="profiletools">
-                        <a href="useradmin.php?edit=<?=$_SESSION['id']?>&from=profile">Edit Profile</a>
+                        <?php if($profid == $_SESSION['id']){?>
+                        <a href="useradmin.php?edit=<?=$profid?>&from=profile">Edit Profile</a>
                         <a href="index.php">index (placeholder)</a>
                         <a href="index.php">index (placeholder)</a>
                         <a href="index.php">index (placeholder)</a>
                         <a href="index.php">index (placeholder)</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="uposts">
                 <div class="toptabs">
-                    <a href="profile.php" class="firsttabpost">User posts</a>
-                    <a href="profile.php?changetocom" class="secondtabcom">User comments</a>
+                    <a href="profile.php?profid=<?=$profid?>" class="firsttabpost">User posts</a>
+                    <a href="profile.php?changetocom&profid=<?=$profid?>" class="secondtabcom">User comments</a>
                 </div>
                 <div class="theposts">
                     <?php 
-                        $userid=$_SESSION['id'];
                         if(!isset($_GET["changetocom"])){
-                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$userid' ORDER BY rating DESC";
+                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
                         } else {
-                            $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$userid' ORDER BY created DESC";
+                            $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
                         }
                         $result=mysqli_query($conn, $sql);
                         while($row=mysqli_fetch_assoc($result)): 
@@ -65,7 +77,7 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                             $thetext=$row['topic'];
                         } else {
             
-                            $thetext=truncateText($row['text'],10);
+                            $thetext=truncateText($row['text'],16);
                         
                         }?>
                         <details>
@@ -94,9 +106,9 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                                             
                                             
                                                 <?php if (isset($iscomment)) { ?>
-                                                <form class="rate-form" action="profile.php?changetocom" method="POST">
+                                                <form class="rate-form" action="profile.php?changetocom&profid=<?=$profid?>" method="POST">
                                                 <?php }else{  ?>
-                                                <form class="rate-form" action="profile.php" method="POST">
+                                                <form class="rate-form" action="profile.php?profid=<?=$profid?>" method="POST">
                                                 <?php } ?>
                                                 <input type="hidden" name="revid" value="<?=$row['id']?>">
                                                 <input type="hidden" name="revtype" value="post">
@@ -110,9 +122,9 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                                         
                                     <?php }  ?>
                                     <?php if (!isset($iscomment)) {?>
-                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile" class="addpost">Show in Posts</a>
+                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile&profid=<?=$profid?>" class="addpost">Show in Posts</a>
                                         <?php } else { ?>
-                                            <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom" class="addpost">Show in Posts</a>
+                                            <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom&profid=<?=$profid?>" class="addpost">Show in Posts</a>
                                         <?php } ?>
                                 
                             

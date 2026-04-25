@@ -142,6 +142,19 @@ function getRealname(){
         return null;
     }
 }
+function getRealname2($uid){
+    global $conn;
+    $userid=$uid;
+    $sql="SELECT realname FROM tbl_user WHERE id=$userid";
+    $result=mysqli_query($conn, $sql);
+    $row=mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result)>0){
+        
+        return $row['realname'];
+    }else{
+        return null;
+    }
+}
 
 function getMail(){
     global $conn;
@@ -156,10 +169,36 @@ function getMail(){
         return null;
     }
 }
+function getMail2($uid){
+    global $conn;
+    $userid=$uid;
+    $sql="SELECT mail FROM tbl_user WHERE id=$userid";
+    $result=mysqli_query($conn, $sql);
+    $row=mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result)>0){
+        
+        return $row['mail'];
+    }else{
+        return null;
+    }
+}
 
 function getCreated(){
     global $conn;
     $userid=$_SESSION['id'];
+    $sql="SELECT created FROM tbl_user WHERE id=$userid";
+    $result=mysqli_query($conn, $sql);
+    $row=mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result)>0){
+        
+        return $row['created'];
+    }else{
+        return null;
+    }
+}
+function getCreated2($uid){
+    global $conn;
+    $userid=$uid;
     $sql="SELECT created FROM tbl_user WHERE id=$userid";
     $result=mysqli_query($conn, $sql);
     $row=mysqli_fetch_assoc($result);

@@ -56,9 +56,9 @@ if(isset($_POST['btnparent'])){
 
         $sql="SELECT * FROM tbl_posts WHERE parentid=$thepost ORDER BY created ASC";
         if(isset($_GET["profile"])){  
-            ?><a href="profile.php" class="addpost">Back</a><?php
+            ?><a href="profile.php?profid=<?=$_GET["profid"]?>" class="addpost">Back</a><?php
         } elseif (isset($_GET["profilecom"])) {
-            ?><a href="profile.php?changetocom" class="addpost">Back</a><?php
+            ?><a href="profile.php?changetocom&profid=<?=$_GET["profid"]?>" class="addpost">Back</a><?php
         } else {
             ?><a href="posts.php" class="addpost">Back</a><?php
         }
@@ -112,7 +112,7 @@ if(isset($_POST['btnparent'])){
             <?php }else{ ?>
                 <p class="expandingboxspace"><?=$row['text']?></p> 
             <?php } ?>
-            <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+            <p>By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
         </div>
             <div class="filler"></div>
             
