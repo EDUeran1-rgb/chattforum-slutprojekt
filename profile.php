@@ -10,10 +10,13 @@ if(isset($_GET["profid"])) {
 } else {
     $profid = $_SESSION['id'];
 }
- if(isset($_GET['changetocom'])){
+if(isset($_GET['changetocom'])){
     $iscomment=intval(urldecode($_GET['changetocom']));
-}?>
-<?php if(isset($_POST['userrating'])){
+}
+if(isset($_GET['changetofavpost'])){
+    $iscomment=intval(urldecode($_GET['changetocom']));
+}
+if(isset($_POST['userrating'])){
 rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revtype']));
     if (isset($iscomment)) {
         header("Location: profile.php?changetocom&profid=$profid");
@@ -60,16 +63,24 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
             </div>
             <div class="uposts">
                 <div class="toptabs">
-                    <a href="profile.php?profid=<?=$profid?>" class="firsttabpost">User posts</a>
-                    <a href="profile.php?changetocom&profid=<?=$profid?>" class="secondtabcom">User comments</a>
+                    <a href="profile.php?profid=<?=$profid?>" class="toptab">User posts</a>
+                    <a href="profile.php?changetocom&profid=<?=$profid?>" class="toptab">User comments</a>
+                    <?php if($_SESSION['id'] == $profid){ ?>
+                       <a href="profile.php?changetofavpost&profid=<?=$profid?>" class="toptab">Favorite posts</a> 
+                       <a href="profile.php?changetofavprof&profid=<?=$profid?>" class="toptab">Favorite profile</a> 
+                    <?php }; ?>
                 </div>
                 <div class="theposts">
                     <?php 
-                        if(!isset($_GET["changetocom"])){
-                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
-                        } else {
+                        if(isset($_GET["changetofavprof"])){
+                            $sql="SELECT * FROM tbl_favorites WHERE userid='$profid' AND favtype='profile' ORDER BY favdate DESC";
+                        } elseif(isset($_GET["changetocom"])) {
                             $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
-                        }
+                        }elseif(isset($_GET["changetofavpost"])){
+                            $sql="SELECT * FROM tbl_favorites WHERE userid='$profid' AND favtype='post' ORDER BY favdate DESC";
+                        }else{
+                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
+                        };
                         $result=mysqli_query($conn, $sql);
                         while($row=mysqli_fetch_assoc($result)): 
                         if(!isset($_GET["changetocom"])){
@@ -120,12 +131,12 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                                             </form>
                                         </div>
                                         
-                                    <?php }  ?>
+                                    <?php };  ?>
                                     <?php if (!isset($iscomment)) {?>
                                             <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile&profid=<?=$profid?>" class="addpost">Show in Posts</a>
                                         <?php } else { ?>
                                             <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom&profid=<?=$profid?>" class="addpost">Show in Posts</a>
-                                        <?php } ?>
+                                        <?php }; ?>
                                 
                             
                             
