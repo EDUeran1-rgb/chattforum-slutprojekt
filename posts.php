@@ -19,7 +19,21 @@ if(isset($_POST['btnparent'])){
     } else {
         header("Location: posts.php");
 }
-}?>
+}
+if(isset($_GET['favorite'])){
+    $tempid=$_SESSION['id'];
+    $sql="SELECT * FROM tbl_favorites WHERE userid='$tempid' AND favtype='post' AND favid='$thepost'";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0){
+        $sql="DELETE FROM tbl_favorites WHERE userid='$tempid' AND favtype='post' AND favid='$thepost'";
+        mysqli_query($conn, $sql);
+    }else{
+        $sql="INSERT INTO tbl_favorites (userid, favtype, favid) VALUES ('$tempid', 'post', '$thepost')";
+        mysqli_query($conn, $sql);
+    }
+    header("Location: posts.php?profid=" . $profid . "&thepost=" . urlencode($thepost));
+}
+?>
 
 
 <html lang="en">
@@ -75,7 +89,13 @@ if(isset($_POST['btnparent'])){
         if(islevel(10)): 
             if($_SESSION['id'] == $theuid) { 
                 echo "<div><a href='postadmin.php?edit=" . $thepost . "&thelink=" . urlencode("posts.php") . "'>🖋️</a>&nbsp;&nbsp;<a href='postadmin.php?del=" . $thepost . "&thelink=" . urlencode("posts.php") . "'>❌</a></div>";
-            }; 
+            };?>
+            <a href="posts.php?favorite&thepost=<?=urlencode($thepost)?>" class="addfavorite">
+                <?php if(isFavorited($row["userid"], 'post')){ ?>
+                    Unfavorite</a>
+                <?php } else { ?>
+                    Favorite</a>
+                <?php } 
         if(!hasrated($thepost)){
             echo "<p>Rate this:</p>";
             }else{

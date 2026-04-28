@@ -13,9 +13,7 @@ if(isset($_GET["profid"])) {
 if(isset($_GET['changetocom'])){
     $iscomment=intval(urldecode($_GET['changetocom']));
 }
-if(isset($_GET['changetofavpost'])){
-    $iscomment=intval(urldecode($_GET['changetocom']));
-}
+
 if(isset($_POST['userrating'])){
 rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revtype']));
     if (isset($iscomment)) {
@@ -73,7 +71,7 @@ if(isset($_GET['favorite'])){
                         <?php }else{ ?>
                         <a href="profile.php?profid=<?=$profid?>&favorite">
                             <?php if(isFavorited($profid, 'profile')){ ?>
-                                Unfavorite
+                                Unfavorite</a>
                             <?php } else { ?>
                                 Favorite</a>
                             <?php } ?>
@@ -99,6 +97,10 @@ if(isset($_GET['favorite'])){
                             $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
                         }elseif(isset($_GET["changetofavpost"])){
                             $sql="SELECT * FROM tbl_favorites WHERE userid='$profid' AND favtype='post' ORDER BY favdate DESC";
+                            $result=mysqli_query($conn, $sql);
+                            $row=mysqli_fetch_assoc($result);
+                            $favid=$row['favid'];
+                            $sql="SELECT * FROM tbl_posts WHERE id='$favid'";
                         }else{
                             $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
                         };
@@ -113,11 +115,11 @@ if(isset($_GET['favorite'])){
                             
                             
                         } elseif(isset($_GET["changetocom"])) {
-                            $thetext=$row['topic'];
                             
-                        
-                        } else {
                             $thetext=truncateText($row['text'],16);
+                        } else {
+                            
+                            $thetext=$row['topic'];
                         }?>
                         <details>
                             <summary>
@@ -169,7 +171,7 @@ if(isset($_GET['favorite'])){
                                             <a href="profile.php?profid=<?=$row['favid']?>" class="addpost">Show Profile</a>
                                     <?php } elseif(isset($iscomment)) { ?>
                                             <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom&profid=<?=$profid?>" class="addpost">Show in Posts</a>
-                                    <?php } else{ ?>
+                                    <?php } else { ?>
                                             <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile&profid=<?=$profid?>" class="addpost">Show in Posts</a>
                                     <?php }; ?>
                                 
