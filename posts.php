@@ -31,7 +31,7 @@ if(isset($_GET['favorite'])){
         $sql="INSERT INTO tbl_favorites (userid, favtype, favid) VALUES ('$tempid', 'post', '$thepost')";
         mysqli_query($conn, $sql);
     }
-    header("Location: posts.php?profid=" . $profid . "&thepost=" . urlencode($thepost));
+    header("Location: posts.php?thepost=" . urlencode($thepost));
 }
 ?>
 
