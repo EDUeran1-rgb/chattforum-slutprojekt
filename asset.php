@@ -102,6 +102,17 @@ function showRating($revid){
         return false;
     }
 }
+function isFavorited($favid, $favtype){
+    global $conn;
+    $userid=$_SESSION['id'];
+    $sql="SELECT * FROM tbl_favorites WHERE userid=$userid AND favid=$favid AND favtype='$favtype'";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 function getUsername(){
     global $conn;

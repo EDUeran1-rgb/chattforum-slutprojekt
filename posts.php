@@ -64,9 +64,9 @@ if(isset($_POST['btnparent'])){
         }
 
         echo"<h2 class='headtopic'>" . $topic . "</h2>";
-        echo"<p class='expandingboxspace'>" . $text . "</p>";
-        echo"<p>Posted by: " . getUsername2($theuid) . " Posted: " . $row['created'] . "</p>";
-        if(showrating($thepost) !== false){
+        echo"<p class='expandingboxspace'>" . $text . "</p>";?>
+        <p>Posted By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
+        <?php if(showrating($thepost) !== false){
             echo"<p>Rating: " . showRating($thepost) . "</p>";
         } else {
             echo"<p>Not rated yet</p>";

@@ -24,6 +24,19 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
         header("Location: profile.php?profid=$profid");
     }
 }
+if(isset($_GET['favorite'])){
+    $tempid=$_SESSION['id'];
+    $sql="SELECT * FROM tbl_favorites WHERE userid='$tempid' AND favtype='profile' AND favid='$profid'";
+    $result=mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result)>0){
+        $sql="DELETE FROM tbl_favorites WHERE userid='$tempid' AND favtype='profile' AND favid='$profid'";
+        mysqli_query($conn, $sql);
+    }else{
+        $sql="INSERT INTO tbl_favorites (userid, favtype, favid) VALUES ('$tempid', 'profile', '$profid')";
+        mysqli_query($conn, $sql);
+    }
+    header("Location: profile.php?profid=$profid");
+}
 
 ?>
 <html lang="en">
@@ -57,6 +70,14 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                         <a href="index.php">index (placeholder)</a>
                         <a href="index.php">index (placeholder)</a>
                         <a href="index.php">index (placeholder)</a>
+                        <?php }else{ ?>
+                        <a href="profile.php?profid=<?=$profid?>&favorite">
+                            <?php if(isFavorited($profid, 'profile')){ ?>
+                                Unfavorite
+                            <?php } else { ?>
+                                Favorite</a>
+                            <?php } ?>
+                        <a href="index.php">index (placeholder)</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -67,7 +88,7 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                     <a href="profile.php?changetocom&profid=<?=$profid?>" class="toptab">User comments</a>
                     <?php if($_SESSION['id'] == $profid){ ?>
                        <a href="profile.php?changetofavpost&profid=<?=$profid?>" class="toptab">Favorite posts</a> 
-                       <a href="profile.php?changetofavprof&profid=<?=$profid?>" class="toptab">Favorite profile</a> 
+                       <a href="profile.php?changetofavprof&profid=<?=$profid?>" class="toptab">Favorite profiles</a> 
                     <?php }; ?>
                 </div>
                 <div class="theposts">
@@ -83,22 +104,33 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                         };
                         $result=mysqli_query($conn, $sql);
                         while($row=mysqli_fetch_assoc($result)): 
-                        if(!isset($_GET["changetocom"])){
+                        if(isset($_GET["changetofavprof"])){
+                            $favid=$row['favid'];
+                            $sql2="SELECT * FROM tbl_user WHERE id='$favid'";
+                            $result2=mysqli_query($conn, $sql2);
+                            $row2=mysqli_fetch_assoc($result2);
+                            $thetext=getUsername2($row2['id']);
                             
+                            
+                        } elseif(isset($_GET["changetocom"])) {
                             $thetext=$row['topic'];
-                        } else {
-            
-                            $thetext=truncateText($row['text'],16);
+                            
                         
+                        } else {
+                            $thetext=truncateText($row['text'],16);
                         }?>
                         <details>
                             <summary>
                                 <div>
                                     <h2 class="headtopic"><?=$thetext?></h2>
+                                    <?php if(isset($_GET["changetofavprof"])){ ?>
+                                        <p>Favorited on: <?=$row['favdate']?></p>
+                                    <?php } else {?>
                                     <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+                                    <?php } ?>
                                 </div>
                                     <div class="filler"></div>
-                                    
+                                     <?php if(!isset($_GET["changetofavprof"])){ ?>
                                     <?php if (showRating($row['id']) !== false) { ?>
                                         <div class="ratingdiv">Rated: <?=showRating($row['id'])?> </div> 
                                     <?php }else { ?>
@@ -131,17 +163,22 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
                                             </form>
                                         </div>
                                         
-                                    <?php };  ?>
-                                    <?php if (!isset($iscomment)) {?>
-                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile&profid=<?=$profid?>" class="addpost">Show in Posts</a>
-                                        <?php } else { ?>
+                                    <?php }; ?>
+                                    <?php }; ?>
+                                    <?php if (isset($_GET['changetofavprof'])) {?>
+                                            <a href="profile.php?profid=<?=$row['favid']?>" class="addpost">Show Profile</a>
+                                    <?php } elseif(isset($iscomment)) { ?>
                                             <a href="posts.php?thepost=<?=urlencode($row['parentid'])?>&profilecom&profid=<?=$profid?>" class="addpost">Show in Posts</a>
-                                        <?php }; ?>
+                                    <?php } else{ ?>
+                                            <a href="posts.php?thepost=<?=urlencode($row['id'])?>&profile&profid=<?=$profid?>" class="addpost">Show in Posts</a>
+                                    <?php }; ?>
                                 
                             
                             
                             </summary>
+                            <?php if(!isset($_GET["changetofavprof"])): ?>
                             <h4 class="expandingboxspace"><?=$row['text']?></h4>
+                            <?php endif; ?>
                         </details>
                         <?php endwhile;?>
                 </div>
