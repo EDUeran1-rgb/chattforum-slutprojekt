@@ -96,16 +96,11 @@ if(isset($_GET['favorite'])){
                         } elseif(isset($_GET["changetocom"])) {
                             $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
                         }elseif(isset($_GET["changetofavpost"])){
-                            $sql="SELECT * FROM tbl_favorites WHERE userid='$profid' AND favtype='post' ORDER BY favdate DESC";
-                            
-                            $result=mysqli_query($conn, $sql);
-                            if(mysqli_num_rows($result)>0){
-                            $row=mysqli_fetch_assoc($result);
-                            $favid=$row['favid'];
-                            $sql="SELECT * FROM tbl_posts WHERE id='$favid'";
-                            } else {
-                                $sql="SELECT * FROM tbl_favorites WHERE userid='0'";
-                            }
+                             $sql="SELECT p.* FROM tbl_posts p 
+          INNER JOIN tbl_favorites f ON p.id = f.favid 
+          WHERE f.userid='$profid' AND f.favtype='post' 
+          ORDER BY f.favdate DESC";
+                        
                         }else{
                             $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
                         };

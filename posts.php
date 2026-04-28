@@ -91,7 +91,7 @@ if(isset($_GET['favorite'])){
                 echo "<div><a href='postadmin.php?edit=" . $thepost . "&thelink=" . urlencode("posts.php") . "'>🖋️</a>&nbsp;&nbsp;<a href='postadmin.php?del=" . $thepost . "&thelink=" . urlencode("posts.php") . "'>❌</a></div>";
             };?>
             <a href="posts.php?favorite&thepost=<?=urlencode($thepost)?>" class="addfavorite">
-                <?php if(isFavorited($row["userid"], 'post')){ ?>
+                <?php if(isFavorited($thepost, 'post')){ ?>
                     Unfavorite</a>
                 <?php } else { ?>
                     Favorite</a>
