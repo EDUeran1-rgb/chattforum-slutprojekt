@@ -3,7 +3,9 @@
         <a href="index.php">Home</a>
         <a href="about.php">About</a>
         <a href="posts.php">Posts</a>
-        
+        <?php if(isLevel(10)):?>
+            <a href="profiles.php">All profiles</a>
+        <?php endif; ?>
         <div class="fill"></div>
         <?php if(isLevel(1000)):?>
             <a href="postadmin.php">Post Admin</a>
