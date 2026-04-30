@@ -4,7 +4,7 @@
         <a href="about.php">About</a>
         <a href="posts.php">Posts</a>
         <?php if(isLevel(10)):?>
-            <a href="profiles.php">All profiles</a>
+            <a href="profiles.php">All Users</a>
         <?php endif; ?>
         <div class="fill"></div>
         <?php if(isLevel(1000)):?>
