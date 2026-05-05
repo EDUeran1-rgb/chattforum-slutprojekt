@@ -24,7 +24,7 @@
                     <h2 class="headtopic">
                         <?php $profimg_id = getProfileImageId($row['id']); ?>
                     <?php if($profimg_id): ?>
-                    <img src="display_image.php?user=<?=$row['id']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <img src="display_image.php?user=<?=$row['id']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
                     <?php endif; ?>
                     <?=getusername2($row['id'])?></h2>
                     
