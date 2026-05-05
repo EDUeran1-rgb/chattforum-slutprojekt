@@ -42,6 +42,8 @@ if(isset($_POST['btn_edit'])){
             
             if($imageid){
                 $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username', profileimageid=$imageid WHERE id=$id";
+            } elseif(isset($_POST['remove_profileimage'])){
+                $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username', profileimageid=NULL WHERE id=$id";
             } else {
                 $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
             }
@@ -59,7 +61,11 @@ if(isset($_POST['btn_edit'])){
     $realname=$_POST['realname'];
     $mail=$_POST['mail'];
     $created=$_POST['created'];
-    $sql="UPDATE tbl_user SET id=$id, username='$username', password='$password', userlevel=$userlevel, lastlogin='$lastlogin', realname='$realname', mail='$mail', created='$created' WHERE id=$id";
+    if(isset($_POST['remove_profileimage'])){
+        $sql="UPDATE tbl_user SET id=$id, username='$username', password='$password', userlevel=$userlevel, lastlogin='$lastlogin', realname='$realname', mail='$mail', created='$created', profileimageid=NULL WHERE id=$id";
+    } else {
+        $sql="UPDATE tbl_user SET id=$id, username='$username', password='$password', userlevel=$userlevel, lastlogin='$lastlogin', realname='$realname', mail='$mail', created='$created' WHERE id=$id";
+    }
     $result=mysqli_query($conn, $sql);
     header("Location: useradmin.php");
 }}
@@ -128,6 +134,16 @@ if (isset($_POST['btn_edit_pass'])){
             <input type="email" name="mail" id="mail" value="<?=$user_data['mail']?>">
             <label for="profileimage">Profile Picture:</label>
             <input type="file" name="profileimage" accept="image/*">
+            <?php if($user_data['profileimageid']): ?>
+                <div style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;">
+                    <p>Current profile picture:</p>
+                    <img src="display_image.php?user=<?=$user_data['id']?>" alt="Profile picture" style="max-width: 150px; border-radius: 10px;">
+                    <br><br>
+                    <label>
+                        <input type="checkbox" name="remove_profileimage"> Remove this picture
+                    </label>
+                </div>
+            <?php endif; ?>
             <?php if(!isset($_GET['from'])): ?>
             <label for="userlevel">User level: (10-300:user, 301-999:power user, 1000-9999:admin, >10000:superuser)</label>
             <input type="number" name="userlevel" id="userlevel" value="<?=$user_data['userlevel']?>">
