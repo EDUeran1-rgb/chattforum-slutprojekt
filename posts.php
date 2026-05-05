@@ -86,9 +86,15 @@ if(isset($_GET['favorite'])){
             }
         }?>
         <?php if(islevel(10)){ ?>
-        <p>Posted By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
+        <p>Posted By: <a href="profile.php?profid=<?=$row["userid"]?>"><?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
         <?php } else { ?>
-            <p>Posted By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+            <p>Posted By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?><?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
         <?php } ?>
         <?php if(showrating($thepost) !== false){
             echo"<p>Rating: " . showRating($thepost) . "</p>";
@@ -148,9 +154,18 @@ if(isset($_GET['favorite'])){
                     <p class="expandingboxspace"><?=$row['text']?></p> 
                 <?php } ?>
             <?php if(islevel(10)){ ?>
-            <p>By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
+            <p>By: <a href="profile.php?profid=<?=$row["userid"]?>">
+                <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?>
+                    <?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
             <?php } else { ?>
-                <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+                <p>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?>
+                    <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
             <?php } ?>
         </div>
             <div class="filler"></div>

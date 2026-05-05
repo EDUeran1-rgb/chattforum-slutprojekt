@@ -135,7 +135,10 @@ if(isset($_GET['favorite'])){
                                     
                                         <p>Favorited on: <?=$row['favdate']?></p>
                                     <?php } else {?>
-                                    <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+                                    <p>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?><?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
                                     <?php } ?>
                                 </div>
                                     <div class="filler"></div>
