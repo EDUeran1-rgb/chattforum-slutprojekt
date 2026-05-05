@@ -114,7 +114,8 @@ if(isset($_GET['favorite'])){
                             $row2=mysqli_fetch_assoc($result2);
                             $thetext=getUsername2($row2['id']);
                             
-                            
+                        } elseif(isset($_GET["changetofavpost"])){
+                            $thetext=$row['topic']; 
                         } elseif(isset($_GET["changetocom"])) {
                             
                             $thetext=truncateText($row['text'],16);
@@ -135,6 +136,7 @@ if(isset($_GET['favorite'])){
                                     
                                         <p>Favorited on: <?=$row['favdate']?></p>
                                     <?php } else {?>
+                                    <?=$thetext?></h2>
                                     <p>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
                                     <?php if($profimg_id): ?>
                                     <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
