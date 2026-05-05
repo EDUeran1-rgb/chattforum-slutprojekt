@@ -85,8 +85,11 @@ if(isset($_GET['favorite'])){
                 echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 500px; margin-top: 10px;'>";
             }
         }?>
-        
+        <?php if(islevel(10)){ ?>
         <p>Posted By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
+        <?php } else { ?>
+            <p>Posted By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+        <?php } ?>
         <?php if(showrating($thepost) !== false){
             echo"<p>Rating: " . showRating($thepost) . "</p>";
         } else {
@@ -144,7 +147,11 @@ if(isset($_GET['favorite'])){
                 <?php }else{ ?>
                     <p class="expandingboxspace"><?=$row['text']?></p> 
                 <?php } ?>
+            <?php if(islevel(10)){ ?>
             <p>By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
+            <?php } else { ?>
+                <p>By: <?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+            <?php } ?>
         </div>
             <div class="filler"></div>
             
