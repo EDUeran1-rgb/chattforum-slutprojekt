@@ -181,6 +181,12 @@ if(isset($_GET['favorite'])){
                             </summary>
                             <?php if(!isset($_GET["changetofavprof"])): ?>
                             <h4 class="expandingboxspace"><?=$row['text']?></h4>
+                            <?php if(!isset($_GET["changetocom"])) { ?>
+                                <?php $postimg_id = getPostImageId($row['id']); ?>
+                                    <?php if($postimg_id): ?>
+                                        <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 300px; margin-top: 10px;">
+                                    <?php endif; ?>
+                                <?php } ?>
                             <?php endif; ?>
                         </details>
                         <?php endwhile;?>
