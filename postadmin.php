@@ -96,13 +96,19 @@ if(isset($_POST['btn_edit'])){
             <?php if($row['parentid']==0){?>
             <h2 class="headtopic"><?=$row['topic']?> &nbsp;&nbsp;<span></span></h2>
             <h4>Post &nbsp;&nbsp;<span></span></h4>
-            <h4>By: <?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
+            <h4>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
+                    <?php endif; ?><?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
             <h4><?=$row['created']?></h4>
                 
             <?php }else{ ?>
                 <h2 class="headtopic"><?=truncateText($row['text'],5)?> &nbsp;&nbsp;<span></span></h2>
                 <h4>Comment &nbsp;&nbsp;<span></span></h4>
-                <h4>By: <?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
+                <h4>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
+                    <?php endif; ?><?=getusername2($row['userid'])?> &nbsp;&nbsp;<span></span></h4>
                 <h4><?=$row['created']?></h4>
             <?php } ?>
             

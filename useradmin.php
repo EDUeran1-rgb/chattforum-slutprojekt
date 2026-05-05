@@ -180,6 +180,10 @@ if (isset($_POST['btn_edit_pass'])){
                 <details>
                     <summary>
                         <div class="id"><?=$row['id'];?></div>
+                        <?php $profimg_id = getProfileImageId($row['id']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['id']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
+                    <?php endif; ?>
                         <div class="user"><?=$row['username'];?></div>
                         <div class="level"><?=$row['userlevel'];?></div>
                     </summary>
