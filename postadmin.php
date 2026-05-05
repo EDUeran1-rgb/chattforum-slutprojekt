@@ -115,7 +115,15 @@ if(isset($_POST['btn_edit'])){
              } ?>  
             <div> <?=$rating2?> &nbsp;&nbsp;<a href="postadmin.php?edit=<?=$row['id']?>">🖋️</a>&nbsp;&nbsp;<a href="postadmin.php?del=<?=$row['id']?>">❌</a></div>   
     </summary>
+        <?php if($row['parentid']==0){?>
+        <?php $postimg_id = getPostImageId($row['id']); ?>
+                <?php if($postimg_id): ?>
+                <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 100%; max-height: 100rem; margin-top: 10px;">
+                <?php endif; ?>
         <h4 class="expandingboxspace"><?=$row['text']?></h4>
+        <?php }else{ ?>
+            <p class="expandingboxspace"><?=$row['text']?></p>
+        <?php } ?>
 </details>
 <?php endwhile; ?>
             <?php endif; ?>

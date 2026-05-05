@@ -136,9 +136,9 @@ if(isset($_GET['favorite'])){
                                         <p>Favorited on: <?=$row['favdate']?></p>
                                     <?php } else {?>
                                     <p>By: <?php $profimg_id = getProfileImageId($row['userid']); ?>
-                    <?php if($profimg_id): ?>
-                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
-                    <?php endif; ?><?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
+                                    <?php if($profimg_id): ?>
+                                    <img src="display_image.php?user=<?=$row['userid']?>" alt="Profile picture" class="profilepic" style="width: 30px; height: 30px; border-radius: 10px;">
+                                    <?php endif; ?><?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
                                     <?php } ?>
                                 </div>
                                     <div class="filler"></div>
@@ -193,7 +193,7 @@ if(isset($_GET['favorite'])){
                             <?php if(!isset($_GET["changetocom"])) { ?>
                                 <?php $postimg_id = getPostImageId($row['id']); ?>
                                     <?php if($postimg_id): ?>
-                                        <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="width: 300px; margin-top: 10px;">
+                                        <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 100%; margin-top: 10px;">
                                     <?php endif; ?>
                                 <?php } ?>
                             <?php endif; ?>

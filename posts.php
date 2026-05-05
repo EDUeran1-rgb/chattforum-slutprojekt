@@ -82,7 +82,7 @@ if(isset($_GET['favorite'])){
         if(isset($thepost)){
             $postimg_id = getPostImageId($thepost);
             if($postimg_id){
-                echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 500px; margin-top: 10px;'>";
+                echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 100%; max-height: 100rem; margin-top: 10px;'>";
             }
         }?>
         <?php if(islevel(10)){ ?>
@@ -148,7 +148,7 @@ if(isset($_GET['favorite'])){
                 
                 <?php $postimg_id = getPostImageId($row['id']); ?>
                 <?php if($postimg_id): ?>
-                <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 300px;">
+                <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 100%; max-height: 100rem; margin-top: 10px;">
                 <?php endif; ?>
                 <?php }else{ ?>
                     <p class="expandingboxspace"><?=$row['text']?></p> 
