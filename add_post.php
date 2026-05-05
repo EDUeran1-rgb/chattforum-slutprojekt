@@ -14,7 +14,21 @@ if(isset($_POST['btnAdd'])){
     $userid=$_SESSION['id'];
     $parentid=htmlentities($_POST['parentid']);
     $topic=htmlentities($_POST['topic']);
-    $sql="INSERT INTO tbl_posts (userid, text, parentid, parenttype, topic ) VALUES ('$userid', '$text', $parentid,'none', '$topic')";
+    
+    
+    $imageid = null;
+    if(isset($_FILES['postimage']) && $_FILES['postimage']['size'] > 0){
+        $imageid = uploadImage('postimage');
+        if($imageid === false){
+            $_SESSION['mess'] = "Invalid image format or too large (max 5MB)";
+            header("Location: add_post.php");
+            exit;
+        }
+    }
+    
+    
+    $sql="INSERT INTO tbl_posts (userid, text, parentid, parenttype, topic, postimageid) 
+          VALUES ('$userid', '$text', $parentid,'none', '$topic', $imageid)";
     $result=mysqli_query($conn, $sql);
     header("Location: posts.php");
 }
@@ -34,9 +48,10 @@ if(isset($_POST['btnAdd'])){
     </header>
 <?php require_once("_nav.php"); ?>
     <main>
-        <form action="add_post.php" method="POST" class="addpostform" onsubmit="disableButton">
+        <form action="add_post.php" method="POST" class="addpostform" onsubmit="disableButton" enctype="multipart/form-data">
             <input type="text" name="topic" placeholder="Topic" required>
             <textarea name="text" placeholder="Text" required class="addposttext"></textarea>
+            <input type="file" name="postimage" accept="image/*">
             <input type="hidden" name="parentid" value="<?=$parentid?>">
             <input type="submit" name="btnAdd" value="Add" class="addpostbttn">
         </form>

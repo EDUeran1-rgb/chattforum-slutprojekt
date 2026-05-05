@@ -28,7 +28,22 @@ if(isset($_POST['btn_edit'])){
             $realname=htmlentities($_POST['realname']);
             $mail=htmlentities($_POST['mail']);
             $username=htmlentities($_POST['username']);
-            $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
+
+            $imageid = null;
+            if(isset($_FILES['profileimage']) && $_FILES['profileimage']['size'] > 0){
+                $imageid = uploadImage('profileimage');
+                if($imageid === false){
+                    $_SESSION['mess'] = "Invalid image format or too large (max 5MB)";
+                    header("Location: useradmin.php?edit=" . $id . "&from=profile");
+                    exit;
+                }
+            }
+
+            if($imageid){
+                $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username', profileimageid=$imageid WHERE id=$id";
+            } else {
+                $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
+            }
             $result=mysqli_query($conn, $sql);
             header("Location: profile.php");
         } else {
@@ -95,7 +110,7 @@ if (isset($_POST['btn_edit_pass'])){
                 $user_data=mysqli_fetch_assoc($result);
 
             ?>
-        <form action="useradmin.php" method="POST">
+        <form action="useradmin.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?=$id?>">
             <input type="hidden" name="password" value="<?=$user_data['password']?>">
             <input type="hidden" name="created" value="<?=$user_data['created']?>">
@@ -110,6 +125,8 @@ if (isset($_POST['btn_edit_pass'])){
             <input type="text" name="realname" id="realname" value="<?=$user_data['realname']?>">
             <label for="mail">Email:</label>
             <input type="email" name="mail" id="mail" value="<?=$user_data['mail']?>">
+            <label for="profileimage">Profile Picture:</label>
+            <input type="file" name="profileimage" accept="image/*">
             <?php if(!isset($_GET['from'])): ?>
             <label for="userlevel">User level: (10-300:user, 301-999:power user, 1000-9999:admin, >10000:superuser)</label>
             <input type="number" name="userlevel" id="userlevel" value="<?=$user_data['userlevel']?>">

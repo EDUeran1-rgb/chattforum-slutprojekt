@@ -53,6 +53,10 @@ if(isset($_GET['favorite'])){
         <div class="profilecontainer">
             <div class="profilespot">
                 <h2>Profile Information</h2>
+                <?php $profimg_id = getProfileImageId($profid); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$profid?>" alt="Profile picture" class="profilepic" style="max-width: 150px; border-radius: 10px;">
+                <?php endif; ?>
                 <p>Username: <?=getUsername2($profid)?></p>
                 <p>Real Name: <?=getRealname2($profid) ? getRealname2($profid) : "Not provided" ?></p>
                 <p>Email: <?=getMail($profid) ? getMail($profid) : "Not provided" ?></p>
@@ -96,10 +100,7 @@ if(isset($_GET['favorite'])){
                         } elseif(isset($_GET["changetocom"])) {
                             $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
                         }elseif(isset($_GET["changetofavpost"])){
-                             $sql="SELECT p.* FROM tbl_posts p 
-          INNER JOIN tbl_favorites f ON p.id = f.favid 
-          WHERE f.userid='$profid' AND f.favtype='post' 
-          ORDER BY f.favdate DESC";
+                             $sql="SELECT p.* FROM tbl_posts p INNER JOIN tbl_favorites f ON p.id = f.favid WHERE f.userid='$profid' AND f.favtype='post' ORDER BY f.favdate DESC";
                         
                         }else{
                             $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";

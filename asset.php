@@ -235,4 +235,72 @@ function truncateText($text, $limit = 100) {
     
     return $truncated . '...';
 }
+
+function uploadImage($file_input_name){
+    global $conn;
+    if(!isset($_FILES[$file_input_name]) || $_FILES[$file_input_name]['size'] == 0){
+        return null;
+    }
+    
+  
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    if(!in_array($_FILES[$file_input_name]['type'], $allowed_types)){
+        return false;
+    }
+    
+   
+    if($_FILES[$file_input_name]['size'] > 5 * 1024 * 1024){
+        return false;
+    }
+    
+   
+    $imagedata = file_get_contents($_FILES[$file_input_name]['tmp_name']);
+    $imagetype = $_FILES[$file_input_name]['type'];
+    
+  
+    $sql = "INSERT INTO tbl_images (imagedata, imagetype) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $imagedata, $imagetype);
+    
+    if($stmt->execute()){
+        return $conn->insert_id; 
+    }
+    return false;
+}
+
+
+function getImageData($imageid){
+    global $conn;
+    $sql = "SELECT imagedata, imagetype FROM tbl_images WHERE id=$imageid";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        return mysqli_fetch_assoc($result);
+    }
+    return null;
+}
+
+
+function getProfileImageId($uid){
+    global $conn;
+    $sql = "SELECT profileimageid FROM tbl_user WHERE id=$uid";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        return $row['profileimageid'];
+    }
+    return null;
+}
+
+
+function getPostImageId($postid){
+    global $conn;
+    $sql = "SELECT postimageid FROM tbl_posts WHERE id=$postid";
+    $result = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($result) > 0){
+        $row = mysqli_fetch_assoc($result);
+        return $row['postimageid'];
+    }
+    return null;
+}
+
 ?>
