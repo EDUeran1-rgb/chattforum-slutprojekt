@@ -136,8 +136,7 @@ if(isset($_GET['favorite'])){
         <div>
             <?php if (!isset($thepost)) { ?>
                 <h2 class="headtopic"><?=$row['topic']?></h2>
-                <?php if (!isset($thepost)) { ?>
-                <h2 class="headtopic"><?=$row['topic']?></h2>
+                
                 <?php $postimg_id = getPostImageId($row['id']); ?>
                 <?php if($postimg_id): ?>
                 <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" class="postimage" style="max-width: 300px;">
@@ -145,10 +144,6 @@ if(isset($_GET['favorite'])){
                 <?php }else{ ?>
                     <p class="expandingboxspace"><?=$row['text']?></p> 
                 <?php } ?>
-            <?php }else{ ?>
-                <p class="expandingboxspace"><?=$row['text']?></p> 
-                
-            <?php } ?>
             <p>By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
         </div>
             <div class="filler"></div>

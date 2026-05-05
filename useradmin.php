@@ -23,13 +23,13 @@ if(isset($_GET['level'])){
 }
 if(isset($_POST['btn_edit'])){
     if(isset($_POST['fromprofile'])){
-        if($_GET['edit'] == $_SESSION['id']){
+        if($id == $_SESSION['id']){
             $id=intval($_POST['id']);
             $realname=htmlentities($_POST['realname']);
             $mail=htmlentities($_POST['mail']);
             $username=htmlentities($_POST['username']);
             
-            // NEW: Handle profile image upload
+            
             $imageid = null;
             if(isset($_FILES['profileimage']) && $_FILES['profileimage']['size'] > 0){
                 $imageid = uploadImage('profileimage');
@@ -40,7 +40,6 @@ if(isset($_POST['btn_edit'])){
                 }
             }
             
-            // Update user info
             if($imageid){
                 $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username', profileimageid=$imageid WHERE id=$id";
             } else {
