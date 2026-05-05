@@ -21,7 +21,13 @@
         while($row = mysqli_fetch_assoc($result)){?>
             <details>
                 <summary>
-                    <h2 class="headtopic"><?=getusername2($row['id'])?></h2>
+                    <h2 class="headtopic">
+                        <?php $profimg_id = getProfileImageId($row['id']); ?>
+                    <?php if($profimg_id): ?>
+                    <img src="display_image.php?user=<?=$row['id']?>" alt="Profile picture" class="profilepic" style="max-width: 30px; max-height: 30px; border-radius: 10px;">
+                    <?php endif; ?>
+                    <?=getusername2($row['id'])?></h2>
+                    
                     <div class="filler"></div>
                     <a href="profile.php?profid=<?=$row['id'];?>" class="addpost">View profile</a>
                 </summary>
