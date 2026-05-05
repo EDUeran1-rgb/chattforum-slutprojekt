@@ -303,4 +303,13 @@ function getPostImageId($postid){
     }
     return null;
 }
+function cleanupUnusedImages(){
+    global $conn;
+    $sql = "DELETE FROM tbl_images WHERE id NOT IN (
+        SELECT profileimageid FROM tbl_user WHERE profileimageid IS NOT NULL
+        UNION
+        SELECT postimageid FROM tbl_posts WHERE postimageid IS NOT NULL
+    )";
+    mysqli_query($conn, $sql);
+}
 ?>

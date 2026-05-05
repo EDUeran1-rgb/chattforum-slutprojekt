@@ -48,8 +48,11 @@ if(isset($_POST['btn_edit'])){
                 $sql="UPDATE tbl_user SET realname='$realname', mail='$mail', username='$username' WHERE id=$id";
             }
             $result=mysqli_query($conn, $sql);
+            if(isset($_POST['remove_profileimage'])){
+                cleanupUnusedImages();
+            }
             header("Location: profile.php");
-        } else {
+            } else {
             header("Location: index.php");
         }
     } else {
@@ -67,6 +70,7 @@ if(isset($_POST['btn_edit'])){
         $sql="UPDATE tbl_user SET id=$id, username='$username', password='$password', userlevel=$userlevel, lastlogin='$lastlogin', realname='$realname', mail='$mail', created='$created' WHERE id=$id";
     }
     $result=mysqli_query($conn, $sql);
+    cleanupUnusedImages(); 
     header("Location: useradmin.php");
 }}
 if (isset($_POST['btn_edit_pass'])){
@@ -132,8 +136,10 @@ if (isset($_POST['btn_edit_pass'])){
             <input type="text" name="realname" id="realname" value="<?=$user_data['realname']?>">
             <label for="mail">Email:</label>
             <input type="email" name="mail" id="mail" value="<?=$user_data['mail']?>">
+            <?php if(isset($_GET['from'])): ?>
             <label for="profileimage">Profile Picture:</label>
             <input type="file" name="profileimage" accept="image/*">
+            <?php endif; ?>
             <?php if($user_data['profileimageid']): ?>
                 <div style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;">
                     <p>Current profile picture:</p>
