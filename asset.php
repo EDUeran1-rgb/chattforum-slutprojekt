@@ -294,6 +294,7 @@ function getProfileImageId($uid){
 
 function getPostImageId($postid){
     global $conn;
+    if(!$postid) return null;
     $sql = "SELECT postimageid FROM tbl_posts WHERE id=$postid";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
@@ -302,5 +303,4 @@ function getPostImageId($postid){
     }
     return null;
 }
-
 ?>

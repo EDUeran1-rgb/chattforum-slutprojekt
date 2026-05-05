@@ -79,9 +79,11 @@ if(isset($_GET['favorite'])){
 
         echo"<h2 class='headtopic'>" . $topic . "</h2>";
         echo"<p class='expandingboxspace'>" . $text . "</p>";
-        $postimg_id = getPostImageId($thepost);
-        if($postimg_id){
-        echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 500px; margin-top: 10px;'>";
+        if(isset($thepost)){
+            $postimg_id = getPostImageId($thepost);
+            if($postimg_id){
+                echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 500px; margin-top: 10px;'>";
+            }
         }?>
         
         <p>Posted By: <a href="profile.php?profid=<?=$row["userid"]?>"><?=getUsername2($row['userid'])?></a> Posted: <?=$row['created']?></p>
