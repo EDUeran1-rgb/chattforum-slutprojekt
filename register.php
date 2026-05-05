@@ -39,7 +39,7 @@ if(isset($_POST['btn_reg'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
