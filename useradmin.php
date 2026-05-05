@@ -23,8 +23,8 @@ if(isset($_GET['level'])){
 }
 if(isset($_POST['btn_edit'])){
     if(isset($_POST['fromprofile'])){
+        $id=intval($_POST['id']);
         if($id == $_SESSION['id']){
-            $id=intval($_POST['id']);
             $realname=htmlentities($_POST['realname']);
             $mail=htmlentities($_POST['mail']);
             $username=htmlentities($_POST['username']);
