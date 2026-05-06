@@ -13,7 +13,7 @@ rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revty
 }
 
 if(isset($_POST['btnparent'])){
-    comment(intval($_POST['parentid']), htmlentities($_POST['text']), 'none');
+    comment(intval($_POST['parentid']), htmlentities($_POST['text']), 'comment');
     if (isset($thepost)) {
         header("Location: posts.php?thepost=" . urlencode($thepost));
     } else {

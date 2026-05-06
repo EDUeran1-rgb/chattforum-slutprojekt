@@ -9,7 +9,13 @@ if(isset($_GET['del'])){
     $sql="SELECT parentid FROM tbl_posts WHERE id=$id";
     $result=mysqli_query($conn, $sql);
     $parid=mysqli_fetch_assoc($result)['parentid'];
-    $sql="DELETE FROM tbl_posts WHERE id=$id OR parentid=$id";
+    $sql="SELECT * FROM tbl_posts WHERE parentid=$id and type='comment'";
+    $result=mysqli_query($conn, $sql);
+    while($row=mysqli_fetch_assoc($result)){
+        $sql="DELETE FROM tbl_reviews WHERE revid={$row['id']}";
+        mysqli_query($conn, $sql);
+    }
+    $sql="DELETE FROM tbl_posts WHERE id=$id OR parentid=$id and type='comment'";
     $result=mysqli_query($conn, $sql);
     $sql="DELETE FROM tbl_reviews WHERE revid=$id";
     $result=mysqli_query($conn, $sql);

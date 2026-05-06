@@ -221,10 +221,10 @@ function getCreated2($uid){
     }
 }
 
-function comment($revid, $text,$parnttype){
+function comment($revid, $text,$type){
     global $conn;
     $userid=$_SESSION['id'];
-    $sql="INSERT INTO tbl_posts (userid, text, parentid, parenttype) VALUES ('$userid', '$text', $revid,'$parnttype')";
+    $sql="INSERT INTO tbl_posts (userid, text, parentid, type) VALUES ('$userid', '$text', $revid,'$type')";
     mysqli_query($conn, $sql);
 }
 function truncateText($text, $limit = 100) {
