@@ -59,7 +59,7 @@ if(isset($_GET['favorite'])){
                 <?php endif; ?>
                 <p>Username: <?=getUsername2($profid)?></p>
                 <p>Real Name: <?=getRealname2($profid) ? getRealname2($profid) : "Not provided" ?></p>
-                <p>Email: <?=getMail($profid) ? getMail($profid) : "Not provided" ?></p>
+                <p>Email: <?=getMail2($profid) ? getMail2($profid) : "Not provided" ?></p>
                 <p>Account created: <?=getCreated2($profid)?></p>
                 <div class="profiletoolscontainer">
                     <?php if($profid == $_SESSION['id']){?>
