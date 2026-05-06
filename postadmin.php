@@ -19,6 +19,8 @@ if(isset($_GET['del'])){
     $result=mysqli_query($conn, $sql);
     $sql="DELETE FROM tbl_reviews WHERE revid=$id";
     $result=mysqli_query($conn, $sql);
+    $sql="DELETE FROM tbl_favorites WHERE favid=$id and favtype='post'";
+    $result=mysqli_query($conn, $sql);
     
     if (isset($_GET['thelink'])) {
         header("Location: " . urldecode($_GET['thelink']). ($parid != 0 ? "?thepost=" . urlencode($parid) : ""));

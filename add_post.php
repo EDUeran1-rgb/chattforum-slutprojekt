@@ -21,7 +21,7 @@ if(isset($_POST['btnAdd'])){
         $imageid = uploadImage('postimage');
         if($imageid === false){
             $_SESSION['mess'] = "Invalid image format or too large (max 5MB)";
-            header("Location: add_post.php");
+            header("Location: index.php");
             exit;
         }
     }

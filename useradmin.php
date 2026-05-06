@@ -8,6 +8,13 @@ if(isset($_GET['del'])){
     $id=intval($_GET['del']);
     $sql="DELETE FROM tbl_user WHERE id=$id";
     $result=mysqli_query($conn, $sql);
+    $sql="DELETE FROM tbl_posts WHERE userid=$id";
+    $result=mysqli_query($conn, $sql);
+    $sql="DELETE FROM tbl_reviews WHERE userid=$id";
+    $result=mysqli_query($conn, $sql);
+    $sql="DELETE FROM tbl_favorites WHERE userid=$id or favid=$id and favtype='profile'";
+    $result=mysqli_query($conn, $sql);
+    cleanupUnusedImages();
     header("Location: useradmin.php");
 }
 if(isset($_GET['level'])){
