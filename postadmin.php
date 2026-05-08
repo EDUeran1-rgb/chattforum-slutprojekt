@@ -43,11 +43,15 @@ if(isset($_POST['btn_edit'])){
         }
     }
     if($imageid){
-        $sql="UPDATE tbl_posts SET topic='$topic',text='$text', postimageid=$imageid WHERE id=$id";
+        $sql="UPDATE tbl_posts SET topic='$topic', type='post',text='$text', postimageid=$imageid WHERE id=$id";
     } elseif(isset($_POST['remove_postimage'])){
-        $sql="UPDATE tbl_posts SET topic='$topic',text='$text', postimageid=NULL WHERE id=$id";
+        $sql="UPDATE tbl_posts SET topic='$topic',type='post',text='$text', postimageid=NULL WHERE id=$id";
     } else {
-        $sql="UPDATE tbl_posts SET topic='$topic',text='$text' WHERE id=$id";
+        if($parid==0){
+        $sql="UPDATE tbl_posts SET topic='$topic',type='post',text='$text' WHERE id=$id";
+        } else {
+            $sql="UPDATE tbl_posts SET type='comment',text='$text' WHERE id=$id";
+        }
     }
     $result=mysqli_query($conn, $sql);
     
@@ -90,7 +94,6 @@ if(isset($_POST['btn_edit'])){
                 $result=mysqli_query($conn, $sql);
                 $row=mysqli_fetch_assoc($result);
                 $parid=$row['parentid'];
-                
 
             ?>
         <form action="postadmin.php" method="POST" enctype="multipart/form-data">
