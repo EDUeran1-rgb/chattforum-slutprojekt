@@ -82,7 +82,7 @@ if(isset($_GET['favorite'])){
         if(isset($thepost)){
             $postimg_id = getPostImageId($thepost);
             if($postimg_id){
-                echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 100%; max-height: 100rem; margin-top: 10px;'>";
+                echo "<img src='display_image.php?post=" . $thepost . "' alt='Post image' class='postimage' style='max-width: 100%; margin-top: 10px;'>";
             }
         }?>
         <?php if(islevel(10)){ ?>
