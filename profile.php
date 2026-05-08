@@ -98,7 +98,7 @@ if(isset($_GET['favorite'])){
                         if(isset($_GET["changetofavprof"])){
                             $sql="SELECT * FROM tbl_favorites WHERE userid='$profid' AND favtype='profile' ORDER BY favdate DESC";
                         } elseif(isset($_GET["changetocom"])) {
-                            $sql="SELECT * FROM tbl_posts WHERE parentid !='0' AND userid='$profid' ORDER BY created DESC";
+                            $sql="SELECT * FROM tbl_posts WHERE parentid !='0' and type='comment' AND userid='$profid' ORDER BY created DESC";
                         }elseif(isset($_GET["changetofavpost"])){
                              $sql="SELECT p.* FROM tbl_posts p INNER JOIN tbl_favorites f ON p.id = f.favid WHERE f.userid='$profid' AND f.favtype='post' ORDER BY f.favdate DESC";
                         
