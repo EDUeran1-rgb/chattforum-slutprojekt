@@ -27,8 +27,7 @@ if(isset($_POST['btnAdd'])){
     }
     
     $imageid_sql = $imageid === null ? 'NULL' : "'$imageid'";
-    $sql="INSERT INTO tbl_posts (userid, text, parentid, type, topic, postimageid) 
-      VALUES ('$userid', '$text', $parentid,'post', '$topic', $imageid_sql)";
+    $sql="INSERT INTO tbl_posts (userid, text, parentid, type, topic, postimageid) VALUES ('$userid', '$text', $parentid,'post', '$topic', $imageid_sql)";
     $result=mysqli_query($conn, $sql);
     header("Location: posts.php");
 }

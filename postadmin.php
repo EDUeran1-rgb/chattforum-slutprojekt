@@ -33,9 +33,27 @@ if(isset($_POST['btn_edit'])){
     $id=intval($_POST['id']);
     $topic=htmlentities($_POST['topic']);
     $text=htmlentities($_POST['text']);
-
-    $sql="UPDATE `tbl_posts` SET `id`=$id,`topic`='$topic',`text`='$text' WHERE id=$id";
+    $imageid = null;
+    if(isset($_FILES['postimage']) && $_FILES['postimage']['size'] > 0){
+        $imageid = uploadImage('postimage');
+        if($imageid === false){
+            $_SESSION['mess'] = "Invalid image format or too large (max 5MB)";
+            header("Location: index.php");
+            exit;
+        }
+    }
+    if($imageid){
+        $sql="UPDATE tbl_posts SET topic='$topic',text='$text', postimageid=$imageid WHERE id=$id";
+    } elseif(isset($_POST['remove_postimage'])){
+        $sql="UPDATE tbl_posts SET topic='$topic',text='$text', postimageid=NULL WHERE id=$id";
+    } else {
+        $sql="UPDATE tbl_posts SET topic='$topic',text='$text' WHERE id=$id";
+    }
     $result=mysqli_query($conn, $sql);
+    
+    if(isset($_POST['remove_postimage'])){
+        cleanupUnusedImages();
+    }
     $sql="SELECT * FROM tbl_posts WHERE id=$id";
     $result=mysqli_query($conn, $sql);
     $parid=mysqli_fetch_assoc($result)['parentid'];
@@ -75,7 +93,7 @@ if(isset($_POST['btn_edit'])){
                 
 
             ?>
-        <form action="postadmin.php" method="POST">
+        <form action="postadmin.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?=$id?>">
             <input type="hidden" name="thelink" value="<?=$link?>">
             <div class="user_data"> Post id: <?=$id?>
@@ -90,6 +108,21 @@ if(isset($_POST['btn_edit'])){
             
             <label for="text">Text:</label>
             <input type="text" name="text" id="text" value="<?=$row['text']?>">
+            <?php if($parid==0){?>
+            
+            <label for="postimage">Profile image:</label>
+            <input type="file" name="postimage" accept="image/*">
+            <?php if($row['postimageid']): ?>
+                <div style="margin-top: 10px; padding: 10px; border: 1px solid #ccc;">
+                    <p>Current post image:</p>
+                    <img src="display_image.php?post=<?=$row['id']?>" alt="Post image" style="max-width: 150px; border-radius: 10px;">
+                    <br><br>
+                    <label>
+                        <input type="checkbox" name="remove_postimage"> Remove this picture
+                    </label>
+                </div>
+            <?php endif; ?>
+            <?php } ?>
             <input type="submit" name="btn_edit" value="Update Post" class="registrbttn">
         </form>
         <?php else: ?>
