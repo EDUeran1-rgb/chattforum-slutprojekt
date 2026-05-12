@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php require_once("asset.php"); ?>
-<?php if(isset($_POST['userrating'])):rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revtype']));
+<?php
+cleanupUnusedImages();
+if(isset($_POST['userrating'])):rate(intval($_POST['userrating']), intval($_POST['revid']), intval($_POST['revtype']));
 header("Location: index.php"); 
 endif;
 if(isset($_POST['btnparent'])){

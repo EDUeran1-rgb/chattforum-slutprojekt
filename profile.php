@@ -1,5 +1,6 @@
 <?php require_once("asset.php"); ?>
 <?php
+cleanupUnusedImages();
 if(!isLevel(10)){ 
     header("Location: index.php");
 }
