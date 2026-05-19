@@ -86,11 +86,17 @@ function showpersonalscore($revid){
 function showRating($revid){
     global $conn;
     if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM tbl_reviews WHERE revid='$revid' LIMIT 1")) > 0) {
+        $sql="SELECT COUNT(*) as count FROM tbl_reviews WHERE revid=$revid";
+        $result=mysqli_query($conn, $sql);
+        $row=mysqli_fetch_assoc($result);
+        $count=$row['count'];
         $sql="SELECT AVG(score) as rating FROM tbl_reviews WHERE revid='$revid'";
         $result=mysqli_query($conn, $sql);
         $row=mysqli_fetch_assoc($result);
         $rating=$row['rating'];
         $sql="UPDATE tbl_posts SET rating=$rating WHERE id=$revid";
+        mysqli_query($conn, $sql);
+        $sql="UPDATE tbl_posts SET ratings=$count WHERE id=$revid";
         mysqli_query($conn, $sql);
         $number=intval(round($row['rating']));
         $retStr="";
@@ -99,6 +105,10 @@ function showRating($revid){
         }
         return $retStr;
     } else {
+        $sql="UPDATE tbl_posts SET rating=0 WHERE id=$revid";
+        mysqli_query($conn, $sql);
+        $sql="UPDATE tbl_posts SET ratings=0 WHERE id=$revid";
+        mysqli_query($conn, $sql);
         return false;
     }
 }
@@ -311,5 +321,12 @@ function cleanupUnusedImages(){
         SELECT postimageid FROM tbl_posts WHERE postimageid IS NOT NULL
     )";
     mysqli_query($conn, $sql);
+}
+function findamountofratings($revid){
+    global $conn;
+    $sql="SELECT COUNT(*) as count FROM tbl_reviews WHERE revid=$revid";
+    $result=mysqli_query($conn, $sql);
+    $row=mysqli_fetch_assoc($result);
+    return $row['count'];
 }
 ?>

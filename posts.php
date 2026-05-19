@@ -40,12 +40,12 @@ if(isset($_GET['favorite'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title><?php if(isset($_GET['newest'])){ echo "Newest Posts"; } else { echo "Top Posts"; } ?></title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Posts</h1>
+        <h1><?php if(isset($_GET['newest'])){ echo "Newest Posts"; } else { echo "Top Posts"; } ?></h1>
     </header>
 <?php require_once("_nav.php"); ?>
     <main>
@@ -97,7 +97,7 @@ if(isset($_GET['favorite'])){
                     <?php endif; ?><?=getUsername2($row['userid'])?> Posted: <?=$row['created']?></p>
         <?php } ?>
         <?php if(showrating($thepost) !== false){
-            echo"<p>Rating: " . showRating($thepost) . "</p>";
+            echo"<p>Rating: " . showRating($thepost) . " from " . findamountofratings($thepost) . " ratings</p>";
         } else {
             echo"<p>Not rated yet</p>";
         }
@@ -134,8 +134,18 @@ if(isset($_GET['favorite'])){
     } else {
          if (isLevel(10)) { ?>
             <a href="add_post.php" class="addpost">Add new post!</a>
-        <?php } 
-        $sql="SELECT * FROM tbl_posts WHERE parentid='0' ORDER BY rating DESC";
+        <?php }
+        if(isset($_GET['newest'])){
+            ?>
+            <a href="posts.php" class="addpost">Top posts</a>
+            <?php
+            $sql="SELECT * FROM tbl_posts WHERE parentid='0' ORDER BY created DESC";
+        } else {
+            ?>
+            <a href="posts.php?newest" class="addpost">Newest posts</a>
+            <?php
+            $sql="SELECT * FROM tbl_posts WHERE parentid='0' ORDER BY rating DESC, ratings DESC, created ASC";
+        }
     }
     $result=mysqli_query($conn, $sql);
     while($row=mysqli_fetch_assoc($result)): ?>

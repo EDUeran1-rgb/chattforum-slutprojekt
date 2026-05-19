@@ -104,7 +104,7 @@ if(isset($_GET['favorite'])){
                              $sql="SELECT p.* FROM tbl_posts p INNER JOIN tbl_favorites f ON p.id = f.favid WHERE f.userid='$profid' AND f.favtype='post' ORDER BY f.favdate DESC";
                         
                         }else{
-                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY rating DESC";
+                            $sql="SELECT * FROM tbl_posts WHERE parentid='0' AND userid='$profid' ORDER BY created DESC";
                         };
                         $result=mysqli_query($conn, $sql);
                         while($row=mysqli_fetch_assoc($result)): 
