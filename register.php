@@ -54,7 +54,7 @@ if(isset($_POST['btn_reg'])){
     <?php else: ?>    
     <form action="register.php?thelink=<?=$_GET['thelink']?>" method="POST" onsubmit="disableButton()">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Preferred username (max 16 chars. required)" required pattern=".{,16}" >
+        <input type="text" name="username" id="username" placeholder="Preferred username (max 16 chars. required)" required pattern=".{1,16}" >
         <label for="realname">Real Name</label>
         <input type="text" name="realname" id="realname" placeholder="Your real name (not required)" >
         <label for="mail">Email</label>
